@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>WEBSITE TEST</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Mono">
+    </head>
+    <body>
+        <nav id="mobile-nav">
+            <div class="flowtimerlogo">FLOWTIMER</div>
+            <a href="/flowtimer">Home</a>
+            <a href="/metrics">Metrics</a>
+            <a href="/settings">Settings</a>
+            <a href="#">Account</a>
+            <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </nav>
+        <aside>
+            <div class="sidebar">
+                <div class="sidebar-item">
+                    <img src="media/flowtimer-icon.svg" alt="Flowtimer">
+                </div>
+                <div class="sidebar-item tooltip">
+                    <a href="/flowtimer">
+                        <div class="hovereffect">
+                        <img src="media/home-icon.svg" alt="Home">
+                        <span class="tooltiptext">Home</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="sidebar-item tooltip">
+                    <a href="/metrics">
+                        <img src="media/metrics-icon.svg" alt="Metrics">
+                        <span class="tooltiptext">Metrics</span>
+                    </a>
+                </div>
+                <div class="sidebar-item tooltip">
+                    <a href="/settings">
+                        <img src="media/settings-icon.svg" alt="Settings">
+                        <span class="tooltiptext">Settings</span>
+                    </a>
+                </div>
+                <hr>
+                <div class="sidebar-item tooltip">
+                    <a href="#">
+                        <img src="media/profile-icon.svg" alt="Account">
+                        <span class="tooltiptext">Account</span>
+                    </a>
+                </div>
+            </div>
+        </aside>
+        <main class="align">
+            <div class="card align">
+                <div class="card-header"><h1>Settings</h1></div>
+                <div class="card-content align">
+                    <h2>Themes</h2>
+                    <div></div>
+                    <h2>Timers</h2>
+                    <div class="container-settingscard">
+                        <div class="settingscard-header">Flowmodoro Timer</div>
+                        <div class="settingscard">
+                            <h2>Work - Break Ratio</h2>
+                            <input type="number" id="workbreakratio" name="workbreakratio" min="1" max="20" value="5">
+                            <h3>For every minute worked, total work time is divided by this number.</h3>
+                            <p>(ex: 60m/5 = 12min break)</p>
+                        </div>
+                        <div class="settingscard-header">Pomodoro Timer</div>
+                        <div class="settingscard">
+                            <h2>Pomodoro</h2>
+                            <input type="number" id="num_pomodoro" name="num_pomodoro" min="1" max="60" value="25">
+                            <h2>Short Break</h2>
+                            <input type="number" id="num_shortbreak" name="num_shortbreak" min="1" max="30" value="5">
+                            <h2>Long Break</h2>
+                            <input type="number" id="num_longbreak" name="num_longbreak" min="1" max="60" value="15">
+                            <h2>Sessions before Long Break</h2>
+                            <input type="number" id="num_sessions" name="num_sessions" min="1" max="8" value="4">
+                        </div>
+                    </div>
+                    <h2>Account deletion!</h2>
+                    <div class="deleteaccount">
+                        <input type="checkbox" id="deleteaccount" name="deleteaccount" value="deleteaccount">
+                        <label for="deleteaccount"> I understand that deleting my account is irreversible.</label>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <div class="footer-content">
+                <div class="footer-text">© Rence Joshua G. Abellanosa. All rights reserved.</div>
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="/flowtimer">Home</a></li>
+                        <li><a href="/metrics">Metrics</a></li>
+                        <li><a href="/settings">Settings</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+        <script src="" async defer></script>
+    </body>
+</html>

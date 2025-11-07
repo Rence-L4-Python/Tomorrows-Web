@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>WEBSITE TEST</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Mono">
+    </head>
+    <body>
+        <nav id="mobile-nav">
+            <div class="flowtimerlogo">FLOWTIMER</div>
+            <a href="/flowtimer">Home</a>
+            <a href="/metrics">Metrics</a>
+            <a href="/settings">Settings</a>
+            <a href="#">Account</a>
+            <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </nav>
+        <aside>
+            <div class="sidebar">
+                <div class="sidebar-item">
+                    <img src="media/flowtimer-icon.svg" alt="Flowtimer">
+                </div>
+                <div class="sidebar-item tooltip">
+                    <a href="/flowtimer">
+                        <div class="hovereffect">
+                        <img src="media/home-icon.svg" alt="Home">
+                        <span class="tooltiptext">Home</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="sidebar-item tooltip">
+                    <a href="/metrics">
+                        <img src="media/metrics-icon.svg" alt="Metrics">
+                        <span class="tooltiptext">Metrics</span>
+                    </a>
+                </div>
+                <div class="sidebar-item tooltip">
+                    <a href="/settings">
+                        <img src="media/settings-icon.svg" alt="Settings">
+                        <span class="tooltiptext">Settings</span>
+                    </a>
+                </div>
+                <hr>
+                <div class="sidebar-item tooltip">
+                    <a href="#">
+                        <img src="media/profile-icon.svg" alt="Account">
+                        <span class="tooltiptext">Account</span>
+                    </a>
+                </div>
+            </div>
+        </aside>
+        <main class="align">
+            <div class="card center align">
+                <div class="card-content center align">
+                    <div class="card-dropdown">
+                            <select name="timers" id="timers">
+                                <option value="flowmodoro">Flowmodoro Timer</li>
+                                <option value="pomodoro">Pomodoro Timer</li>
+                                <option value="countdown">Countdown Timer</li>
+                            </select>
+                    </div>
+                    <div id="timer"></div>
+                    <div class="timerbuttons">
+                        <button><img src="media/restart-button.svg"></button>
+                        <button><img src="media/play-button.svg"></button>
+                        <button><img src="media/finish-button.svg"></button>
+                    </div>
+                    <div class="taskselector">
+                        Select / Create a task
+                    </div>
+                    <div class="container-tasks">
+                        <div class="task-header">Tasks</div>
+                        <div class="taskpop-wrapper">
+                            <div class="taskpop">Task1</div>
+                            <div class="taskpop">Task2</div>
+                            <div class="taskpop">Task3</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <div class="footer-content">
+                <div class="footer-text">© Rence Joshua G. Abellanosa. All rights reserved.</div>
+                <div class="footer-links">
+                    <ul id="footer-links">
+                        <li><a href="/flowtimer">Home</a></li>
+                        <li><a href="/metrics">Metrics</a></li>
+                        <li><a href="/settings">Settings</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+        <script src="script.js" async defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/progressbar.js/dist/progressbar.min.js"></script>
+        <script src="timer.js" async defer></script>
+    </body>
+</html>
