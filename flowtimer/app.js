@@ -9,8 +9,6 @@ const port = 3000;
 
 // Middleware
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/media', express.static(path.join(__dirname, 'media')));
 
 // Code reference from Bart Read, https://stackoverflow.com/questions/16534545/how-to-get-rid-of-html-extension-when-serving-webpages-with-node-js
 app.use(express.static(path.join(__dirname, 'public'), {

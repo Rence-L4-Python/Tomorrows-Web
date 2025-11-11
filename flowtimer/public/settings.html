@@ -6,7 +6,7 @@
         <title>WEBSITE TEST</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Mono">
     </head>
     <body>
@@ -22,73 +22,107 @@
         </nav>
         <aside>
             <div class="sidebar">
-                <div class="sidebar-item">
+                <div class="sidebar-item lowopac">
                     <img src="media/flowtimer-icon.svg" alt="Flowtimer">
                 </div>
-                <div class="sidebar-item tooltip">
+                <div class="sidebar-middle">
+                    <div class="sidebar-item tooltip">
                     <a href="/flowtimer">
                         <div class="hovereffect">
                         <img src="media/home-icon.svg" alt="Home">
                         <span class="tooltiptext">Home</span>
                         </div>
                     </a>
+                    </div>
+                    <div class="sidebar-item tooltip">
+                        <a href="/metrics">
+                            <img src="media/metrics-icon.svg" alt="Metrics">
+                            <span class="tooltiptext">Metrics</span>
+                        </a>
+                    </div>
+                    <div class="sidebar-item tooltip">
+                        <a href="/settings">
+                            <img src="media/settings-icon.svg" alt="Settings">
+                            <span class="tooltiptext">Settings</span>
+                        </a>
+                    </div>
+                    <hr>
+                    <div class="sidebar-item tooltip">
+                        <a href="#" id="account-modal">
+                            <img src="media/profile-icon.svg" alt="Account">
+                        </a>
+                    </div>
                 </div>
-                <div class="sidebar-item tooltip">
-                    <a href="/metrics">
-                        <img src="media/metrics-icon.svg" alt="Metrics">
-                        <span class="tooltiptext">Metrics</span>
-                    </a>
-                </div>
-                <div class="sidebar-item tooltip">
-                    <a href="/settings">
-                        <img src="media/settings-icon.svg" alt="Settings">
-                        <span class="tooltiptext">Settings</span>
-                    </a>
-                </div>
-                <hr>
-                <div class="sidebar-item tooltip">
-                    <a href="#">
-                        <img src="media/profile-icon.svg" alt="Account">
-                        <span class="tooltiptext">Account</span>
-                    </a>
+                <div class="sidebar-item transparent">
+                    <img src="media/flowtimer-icon.svg" alt="Flowtimer">
                 </div>
             </div>
         </aside>
         <main class="align">
-            <div class="card align">
-                <div class="card-header"><h1>Settings</h1></div>
-                <div class="card-content align">
-                    <h2>Themes</h2>
-                    <div></div>
-                    <h2>Timers</h2>
-                    <div class="container-settingscard">
-                        <div class="settingscard-header">Flowmodoro Timer</div>
-                        <div class="settingscard">
-                            <h2>Work - Break Ratio</h2>
-                            <input type="number" id="workbreakratio" name="workbreakratio" min="1" max="20" value="5">
-                            <h3>For every minute worked, total work time is divided by this number.</h3>
-                            <p>(ex: 60m/5 = 12min break)</p>
-                        </div>
-                        <div class="settingscard-header">Pomodoro Timer</div>
-                        <div class="settingscard">
-                            <h2>Pomodoro</h2>
-                            <input type="number" id="num_pomodoro" name="num_pomodoro" min="1" max="60" value="25">
-                            <h2>Short Break</h2>
-                            <input type="number" id="num_shortbreak" name="num_shortbreak" min="1" max="30" value="5">
-                            <h2>Long Break</h2>
-                            <input type="number" id="num_longbreak" name="num_longbreak" min="1" max="60" value="15">
-                            <h2>Sessions before Long Break</h2>
-                            <input type="number" id="num_sessions" name="num_sessions" min="1" max="8" value="4">
+            <div class="cardalt">
+                <h1>Settings</h1>
+                <div class="cardalt-content">
+                    <div>
+                        <h2>Themes</h2>
+                        <select>
+                            <option>Mountain</option>
+                            <option>Clouds</option>
+                        </select>
+                    </div>
+                    <div>
+                        <h2>Timers</h2>
+                        <div class="settings-timer">
+                            <div class="direction-column">
+                                <div>
+                                    <div class="settings-timercardheader"><span>Flowmodoro Timer</span></div>
+                                    <div class="settings-timercardbody">
+                                        <input name="setting-flowmodoro" id="setting-flowmodoro" type="text" value="5">
+                                        <label for="setting-flowmodoro">Work - Break Ratio</label>
+                                        <span>For every minute worked, total work time is divided by this number.</span>
+                                    </div>
+                                </div> 
+                                <div>
+                                    <div class="settings-timercardheader"><span>Countdown Timer</span></div>
+                                    <div class="settings-timercardbody">
+                                        <input name="setting-countdown" id="setting-countdown" type="text" value="60m">
+                                        <label for="setting-countdown">Timer</label>
+                                        <span>The same as a normal timer.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="settings-timercardheader"><span>Pomodoro Timer</span></div>
+                                <div class="settings-timercardbody height-285">
+                                    <label for="setting-pomodoro">Pomodoro</label>
+                                    <input name="setting-pomodoro" id="setting-pomodoro" type="text" value="25m">
+                                    <label for="setting-shortbreak">Short Break</label>
+                                    <input name="setting-shortbreak" id="setting-shortbreak" type="text" value="25m">
+                                    <label for="setting-longbreak">Long Break</label>
+                                    <input name="setting-longbreak" id="setting-longbreak" type="text" value="25m">
+                                    <label for="setting-sessions">Sessions before Long Break</label>
+                                    <input name="setting-sessions" id="setting-sessions" type="text" value="4">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <h2>Account deletion!</h2>
-                    <div class="deleteaccount">
-                        <input type="checkbox" id="deleteaccount" name="deleteaccount" value="deleteaccount">
-                        <label for="deleteaccount"> I understand that deleting my account is irreversible.</label>
+                    <div>
+                        <h3>Account deletion!</h3>
+                        <div class="cardalt-div2">
+                            <input name="account-deletion" id="account-deletion" type="checkbox">
+                            <label for="account-deletion">I want to delete my account</label>
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
+        <template id="account-template">
+            <div class="tooltiptext account-tooltip">
+                <h2>Hello,</h2>
+                <span>example@gmail.com</span>
+                <hr>
+                <button>Sign out</button>
+            </div>
+        </template>
         <footer>
             <div class="footer-content">
                 <div class="footer-text">© Rence Joshua G. Abellanosa. All rights reserved.</div>
@@ -101,6 +135,6 @@
                 </div>
             </div>
         </footer>
-        <script src="" async defer></script>
+        <script src="js/main.js" type="module"></script>
     </body>
 </html>

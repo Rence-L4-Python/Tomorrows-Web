@@ -6,7 +6,7 @@
         <title>WEBSITE TEST</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Mono">
     </head>
     <body>
@@ -22,68 +22,70 @@
         </nav>
         <aside>
             <div class="sidebar">
-                <div class="sidebar-item">
+                <div class="sidebar-item lowopac">
                     <img src="media/flowtimer-icon.svg" alt="Flowtimer">
                 </div>
-                <div class="sidebar-item tooltip">
+                <div class="sidebar-middle">
+                    <div class="sidebar-item tooltip">
                     <a href="/flowtimer">
-                        <div class="hovereffect">
                         <img src="media/home-icon.svg" alt="Home">
                         <span class="tooltiptext">Home</span>
-                        </div>
                     </a>
+                    </div>
+                    <div class="sidebar-item tooltip">
+                        <a href="/metrics">
+                            <img src="media/metrics-icon.svg" alt="Metrics">
+                            <span class="tooltiptext">Metrics</span>
+                        </a>
+                    </div>
+                    <div class="sidebar-item tooltip">
+                        <a href="/settings">
+                            <img src="media/settings-icon.svg" alt="Settings">
+                            <span class="tooltiptext">Settings</span>
+                        </a>
+                    </div>
+                    <hr>
+                    <div class="sidebar-item tooltip">
+                        <a href="#" id="account-modal">
+                            <img src="media/profile-icon.svg" alt="Account">
+                        </a>
+                    </div>
                 </div>
-                <div class="sidebar-item tooltip">
-                    <a href="/metrics">
-                        <img src="media/metrics-icon.svg" alt="Metrics">
-                        <span class="tooltiptext">Metrics</span>
-                    </a>
-                </div>
-                <div class="sidebar-item tooltip">
-                    <a href="/settings">
-                        <img src="media/settings-icon.svg" alt="Settings">
-                        <span class="tooltiptext">Settings</span>
-                    </a>
-                </div>
-                <hr>
-                <div class="sidebar-item tooltip">
-                    <a href="#">
-                        <img src="media/profile-icon.svg" alt="Account">
-                        <span class="tooltiptext">Account</span>
-                    </a>
+                <div class="sidebar-item transparent">
+                    <img src="media/flowtimer-icon.svg" alt="Flowtimer">
                 </div>
             </div>
         </aside>
         <main class="align">
-            <div class="card center align">
-                <div class="card-header"><h1>Metrics</h1></div>
-                <div class="card-content center align">
-                    <div class="card-dropdown">
-                        <div class="dropdown-item">Daily stats</div>
-                        <div class="dropdown-item">Weekly stats</div>
-                        <div class="dropdown-item">Monthly stats</div>
-                    </div>
-                    <img src="media/temp-image.png" alt="Metrics Graph">
-                    <h1>0h 0m 0s</h1>
-                    <h2>Total time worked</h2>
-                    <p>October 20, 2025</p>
-                    <div class="container-metricsplus">
-                        <div class="metricsplus">
-                            <div class="metricsplus-header">Tasks Completed Today</div>
-                            <div class="metricsplus-content">0</div>
-                        </div>
-                        <div class="metricsplus">
-                            <div class="metricsplus-header">Longest Focus Time</div>
-                            <div class="metricsplus-content">0s</div>
-                        </div>
-                        <div class="metricsplus">
-                            <div class="metricsplus-header">Amount of Focus Sessions</div>
-                            <div class="metricsplus-content">0</div>
-                        </div>
+            <div class="cardalt">
+                <h1>Metrics</h1>
+                <div class="cardalt-content">
+                    <select class="">
+                        <option>Daily Stats</option>
+                        <option>Weekly Stats</option>
+                        <option>Monthly Stats</option>
+                        <option>Yearly Stats</option>
+                    </select>
+                    <div class="cardalt-div1"><canvas id="acquisitions" style="width:100%; height:100%;"></canvas></div>
+                    <div>
+                        <ul>
+                            <li>Total time worked: <span>7h 15m 0s</span> <span>(Jan 1, 2026)</span></li>
+                            <li>Tasks completed: <span>3</span></li>
+                            <li>Longest Focus Time: <span>60m</span></li>
+                            <li>Amount of Sessions: <span>12</span></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </main>
+        <template id="account-template">
+            <div class="tooltiptext account-tooltip">
+                <h2>Hello,</h2>
+                <span>example@gmail.com</span>
+                <hr>
+                <button>Sign out</button>
+            </div>
+        </template>
         <footer>
             <div class="footer-content">
                 <div class="footer-text">© Rence Joshua G. Abellanosa. All rights reserved.</div>
@@ -96,6 +98,7 @@
                 </div>
             </div>
         </footer>
-        <script src="" async defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="js/main.js" type="module"></script>
     </body>
 </html>
