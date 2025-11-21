@@ -17,6 +17,10 @@ html{
     --l: 24px;
     --xl: 32px;
     --xxl: 48px;
+    --sidebar-icon-color: white;
+    --hr-color: white;
+    --sidebar-hover-bg: #149FE5;
+    --header-color: #149FE5;
 }
 
 .text-xs{font-size: var(--xs);}
@@ -40,7 +44,7 @@ html{
     flex-direction: column;
     gap: 10px;
 }
-.direction-row{flex-direction: row;}
+.direction-row{display: flex; flex-direction: row;}
 .width-250{width: 250px !important;}
 .width-1000{width: 1000px;}
 .height-285{height: 285px !important;}
@@ -119,8 +123,7 @@ h2{
     font-size: 32px;
 }
 hr{
-    width: 40px;
-    border: 1px dashed #D9D9D9;
+    border: 1px dashed var(--hr-color);
 }
 .mt-10 ul li:not(:first-child){
     margin-top: 10px;
@@ -141,10 +144,10 @@ form{
     display: flex;
     flex-direction: column;
     gap: var(--m);
-    width: 250px;
+    width: 300px;
 }
 label{
-    font-size: 14px;
+    font-size: 16px;
     color: #9C9C9C;
     font-weight: bold;
 }
@@ -153,7 +156,6 @@ input{
     border-radius: 6px;
     border: none;
     background-color: transparent;
-    padding-left: 12px;
     color: white;
     font-family: 'Nunito', sans-serif;
     letter-spacing: 0.5px;
@@ -179,7 +181,7 @@ input{
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 20px;
+    border-radius: var(--m);
     border: 2px solid white;
 }
 .cardalt h1{
@@ -284,6 +286,16 @@ input{
     gap: 10px;
     border-radius: 6px;
 }
+.card-dropdown select{
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-family: 'Nunito', sans-serif;
+}
+.card-dropdown option{
+    position: absolute;
+    top: 0;
+}
 .card-header{
     display: flex;
     width: 100%;
@@ -299,14 +311,14 @@ input{
     color: white;
 }
 .taskselector{
-    border: 2px solid #696969;
+    border: 2px solid rgba(255,255,255,0.5);
     width: 310px;
     height: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    color: #A1A1A1;
+    color: rgba(255,255,255,0.5);
     letter-spacing: 0.5px;
     transform: translateY(90px);
 }
@@ -317,7 +329,7 @@ input{
 .task-header{
     width: 100%;
     display: flex;
-    background-color : #149FE5;
+    background-color : var(--header-color);
     height: 25px;
     font-size: 14px;
     letter-spacing: 0.5px;
@@ -339,6 +351,39 @@ input{
     font-size: 14px;
     color: white;
     border-radius: 6px;
+}
+.task-item{
+    display: flex;
+    flex-direction: column;
+}
+.task-item div:nth-child(1){
+    margin-top: 10px;
+}
+.task-item button{
+    border-radius: 6px;
+    width: 20px;
+    height: 20px;
+    font-family: monospace;
+}
+.task-item button:nth-child(1) span{
+    position: relative;
+    bottom: 1px;
+}
+.task-item button:nth-child(2) span{
+    position: relative;
+    bottom: 1px;
+}
+.task-item button:hover{
+    cursor: pointer;
+}
+.task-text{
+    width: 200px;
+    overflow-x: hidden;
+    border: 1px solid rgba(0,0,0,0.2);
+    padding-left: 6px;
+    padding-right: 6px;
+    margin-right: var(--m);
+    color: rgba(0,0,0,0.6);
 }
 select{
     appearance: none;
@@ -370,8 +415,9 @@ select{
     transform: translateY(60px);
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
-.timerbuttons > button{
+.timerbuttons button{
     background-color: transparent;
 }
 .select-button{
@@ -386,30 +432,6 @@ select{
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.select-dropdown{
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: all 0.3s ease;
-    opacity: 0;
-}
-.select-dropdown.active{
-    opacity: 1;
-    transform: scaleY(1);
-    height: auto;
-    pointer-events: auto;
-}
-.select-dropdown li{
-    display: flex;
-    height: 25px;
-    background-color: rgba(255, 255, 255, 80%);
-    border-radius: 6px;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    font-weight: 600;
-    color: rgba(0,0,0,0.6);
-    letter-spacing: 0.5px;
 }
 .homepage-demo{
     width: 1000px;
@@ -494,7 +516,7 @@ select{
     justify-content: center;
     flex-direction: column;
     gap: 100px;
-    background-image: linear-gradient(to bottom, #8E86FF, #2D3142)
+    background-image: linear-gradient(to bottom, #6358FF, #796FFF, #8E86FF, #5E5CA1, #2D3142)
 }
 .homepage-bigsection h1{
     color: white;
@@ -608,25 +630,15 @@ select{
 
 .taskpop-wrapper{
     overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.5) rgba(0,0,0,0.1);
     width: 100%;
-    height: 0;
-    pointer-events: none;;
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: all 0.3s ease;
-    opacity: 0;
-}
-
-.taskpop-wrapper.active{
-    opacity: 1;
-    transform: scaleY(1);
     height: auto;
-    pointer-events: auto;
 }
 
 .taskpop-wrapper li{
     display: flex;
-    height: 55px;
+    height: 60px;
     background-color: rgba(255, 255, 255, 80%);
     border-radius: 6px;
     justify-content: center;
@@ -636,9 +648,14 @@ select{
     color: rgba(0,0,0,0.6);
     letter-spacing: 0.5px;
 }
+.taskpop-wrapper button{
+    height: 20px;
+    width: 20px;
+    border: 1px solid black;
+}
 .section-1{
-    background-image: linear-gradient(to bottom, #8E86FF,#2D3142);
-    height: 1000px;
+    background-image: linear-gradient(to bottom, #6358ff, #8E86FF);
+    height: 100vh;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -649,8 +666,8 @@ select{
     display: none;
 }
 .login-container{
-    height: 310px;
-    width: 300px;
+    height: 400px;
+    width: 390px;
     background-color: #ffffff;
     border-radius: var(--m);
     margin-top: 10px;
@@ -660,12 +677,23 @@ select{
     justify-content: center;
     align-items: center;
 }
+.login-container input{
+    padding-left: 6px;
+}
 .signup-button{
     background-color: #584DEF;
     border: none;
     border-radius: 6px;
     color: white;
     height: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    font-family: "Nunito", sans-serif;
+}
+.signup-button:hover{
+    cursor: pointer;
+    background-color: #4138c1;
 }
 .ask-account{
     color: white;
@@ -674,6 +702,7 @@ select{
     flex-direction: column;
     gap: 10px;
     margin-top: 10px;
+    font-size: 16px;
 }
 .deleteaccount{
     display: flex;
@@ -695,32 +724,55 @@ select{
     gap: 10px;
 }
 .tooltip {
-  position: relative;
-  display: inline-block;
+    position: relative;
+    display: inline-block;
 }
 .tooltiptext {
-  visibility: hidden;
-  width: 80px;
-  background-color: black;
-  font-family: 'Nunito', sans-serif;
-  letter-spacing: 0.5px;
-  color: #ffffff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 12px;
-  left: 140%;
-  transform: translateX(-20px);
-  transition: opacity 1s ease, transform 0.3s ease, visibility 0.1s;
-  pointer-events: none;
+    visibility: hidden;
+    width: 80px;
+    background-color: black;
+    font-family: 'Nunito', sans-serif;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 12px;
+    left: 140%;
+    transform: translateX(-20px);
+    transition: 1s ease, transform 0.3s ease, visibility 0.1s;
+    pointer-events: none;
+}
+.overlay-tooltip{
+    visibility: hidden;
+    position: absolute;
+    background-color: black;
+    color: #ffffff;
+    font-family: 'Nunito', sans-serif;
+    white-space: nowrap;
+    padding: 6px 10px;
+    top: -40px;
+    border-radius: 6px;
+    transition: 1s ease, transform 0.3s ease, visibility 0.1s;
+    transform: translateY(10px);
+    pointer-events: none;
+}
+.timerbutton-wrapper:hover .overlay-tooltip{
+    visibility: visible;
+    transform: translateY(0);
+}
+.timerbutton-wrapper{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 .account-tooltip{
     width: 250px;
     height: 100px;
-    border: 1px solid white;
-    border-radius: 20px;
+    border-radius: var(--m);
     bottom: -30px;
     text-align: left;
     display: flex;
@@ -755,11 +807,46 @@ select{
     cursor: pointer;
 }
 
-.tooltip:hover .tooltiptext {
+.tooltip:hover .tooltiptext{
     visibility: visible;
-    opacity: 1;
     transform: translateX(0);
 }
+
+.modal-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+}
+
+.modal-box{
+    background: white;
+    padding: var(--m);
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+    height: 310px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: var(--m);
+}
+
+.modal-box p{
+    margin-bottom: var(--m);
+}
+
+#restart-modal:hover .overlay-tooltip, #play-modal:hover .overlay-tooltip, #finish-modal:hover .overlay-tooltip{
+    visibility: visible;
+    transform: translateY(0);
+}  
 #homepage{
     background-color: white;
     flex-direction: column;
@@ -772,6 +859,20 @@ select{
 #loginForm input{
     background-color: #D2D2D2;
     color: rgba(0, 0, 0, 1);
+}
+#acquisitions{
+    height: 100% ;
+    width: 100% ;
+    margin: auto;
+}
+#timerselector{
+    background-color: var(--header-color);
+    border: none;
+}
+#errorMessage{
+    color: red;
+    position: fixed;
+    bottom: 34%;
 }
 @media only screen and (min-width: 1024px){
     footer{
@@ -814,11 +915,18 @@ select{
         border-radius: 10px;
     }
     .sidebar a:hover::before{
-        background-color: #149FE5;
+        background-color: var(--sidebar-hover-bg);
     }
     .sidebar a img{
         position: relative;
         z-index: 1;
+    }
+    .sidebar-link svg{
+        width: 40px;
+        height: 40px;
+        z-index: 1;
+        position: relative;
+        fill: var(--sidebar-icon-color);
     }
     nav{
         display: none;

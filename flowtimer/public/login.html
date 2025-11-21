@@ -6,8 +6,10 @@
         <title>WEBSITE TEST</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="google-signin-client_id" content="1037577736071-4gba0fb3ge2hk41crpeg2iqsorvtf9ih.apps.googleusercontent.com">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Mono">
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     </head>
     <body>
         <main>
@@ -15,7 +17,9 @@
                 <div class="section-1">
                     <div class="flowtimerlogo"><img src="media/flowtimer-logo.svg" alt="Flowtimer"></div>
                     <div class="login-container">
-                        <form id="loginForm">
+                        <form id="loginForm" action="/login" method="POST">
+                            <div class="g-signin2" data-onsuccess="onSignIn" data-width="300" data-longtitle="true"></div>
+                            <hr class="w-auto bg-black/25">
                             <div class="flexgroup">
                             <label for="email">EMAIL</label>
                             <input type="email" name="email" id="email" placeholder="email@example.com" required>
@@ -24,16 +28,18 @@
                             <label for ="password">PASSWORD</label>
                             <input type="password" name="password" id="password" placeholder="****" required>
                             </div>
-                            <button type="submit" class="signup-button">Sign up</button>
+                            <button type="submit" class="signup-button">Login</button>
                         </form>
+                        <p id="errorMessage"></p>
                     </div>
                     <div class="ask-account">
-                        <p>Already have an account?</p>
-                        <a href="/flowtimer">Log in</a>
+                        <p>Don't have an account?</p>
+                        <a href="/signup" class="hover:underline">Sign up</a>
                     </div>
                 </div>
             </div>
         </main>
-        <script src="js/main.js"></script>
+        <script src="js/accountForm.js"></script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
     </body>
 </html>

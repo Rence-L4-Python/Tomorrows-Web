@@ -11,7 +11,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ email, password })
-    });
+    })
     
     const data = await response.json();
     if (response.ok) {
@@ -20,21 +20,22 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     } else {
         document.getElementById('errorMessage').textContent = data.error;
     }
-});
 
-  const list = document.getElementById('dropdownlist');
-
-  list.addEventListener('click', (e) => {
-    if (e.target.classList.contains('dropdown-item')) {
-      // Remove old selection
-      list.querySelectorAll('.dropdown-item').forEach(item => {
-        item.classList.remove('selected');
-      });
-
-      // Mark the clicked one
-      e.target.classList.add('selected');
-
-      // Move it to the top
-      list.insertBefore(e.target, list.firstChild);
+    if (data.success){
+      window.location.href = "/flowtimer";
     }
-  });
+})
+
+// function onSuccess(googleUser){
+//     console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+// }
+// function onFailure(error){
+//     gapi.signin2.render('my-signin2', {
+//         'scope': 'profile-email',
+//         'width': 240,
+//         'height': 50,
+//         'longtitle': true,
+//         'onsuccess': onSuccess,
+//         'onfailure': onFailure
+//     });
+// }

@@ -11,13 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
         tooltipClone = template.content.cloneNode(true);
         accountModal.appendChild(tooltipClone);
       }
-      accountModal.querySelector('.account-tooltip').style.opacity = 1;
-    });
-
-    accountModal.addEventListener('mouseleave', () => {
-      if (tooltipClone) {
-        accountModal.querySelector('.account-tooltip').style.opacity = 0;
-      }
-    });
+    })
   }
-});
+})

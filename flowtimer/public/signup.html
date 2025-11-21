@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>WEBSITE TEST</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Mono">
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    </head>
+    <body>
+        <main>
+            <div class="container-login">
+                <div class="section-1">
+                    <div class="flowtimerlogo"><img src="media/flowtimer-logo.svg" alt="Flowtimer"></div>
+                    <div class="login-container">
+                        <form id="signupForm" action="/login" method="POST">
+                            <div class="flexgroup">
+                            <label for="email">EMAIL</label>
+                            <input type="email" name="email" id="email" placeholder="email@example.com" required>
+                            </div>
+                            <div class="flexgroup">
+                            <label for ="password">PASSWORD</label>
+                            <input type="password" name="password" id="password" placeholder="****" required>
+                            </div>
+                            <button type="submit" class="signup-button">Sign Up</button>
+                        </form>
+                    </div>
+                    <div class="ask-account">
+                        <p>Already have an account?</p>
+                        <a href="/login" class="hover:underline">Log in</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script src="js/accountForm.js"></script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+    </body>
+</html>
