@@ -6,3 +6,4 @@ import './graph.js';
 import './graphChange.js';
 import './settingsChange.js';
 import './crudFeature.js';
+import './audioSFX.js';

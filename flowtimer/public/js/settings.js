@@ -25,5 +25,10 @@ export function loadSettings(){
 
 export function settingsHelper(key, defaultValue){
     loadSettings();
-    return settings[key] !== undefined ? settings[key]: defaultValue;
+    if (settings[key] !== undefined){
+        return settings[key];
+    }
+    else{
+        return defaultValue;
+    }
 }

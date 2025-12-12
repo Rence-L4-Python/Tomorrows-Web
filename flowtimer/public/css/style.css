@@ -133,10 +133,7 @@ hr{
     gap: var(--m);
     list-style: none;
 }
-button{
-    border: none;
-}
-button > img:hover{
+button:hover{
     filter: brightness(0.9);
     cursor: pointer;
 }
@@ -155,8 +152,6 @@ input{
     height: 30px;
     border-radius: 6px;
     border: none;
-    background-color: transparent;
-    color: white;
     font-family: 'Nunito', sans-serif;
     letter-spacing: 0.5px;
 }
@@ -312,19 +307,37 @@ input{
 }
 .taskselector{
     border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 6px;
+    background-color: rgba(255,255,255,0.8);
     width: 310px;
-    height: 25px;
+    height: 25px !important;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    color: rgba(255,255,255,0.5);
     letter-spacing: 0.5px;
     transform: translateY(90px);
 }
 .taskselector input{
-    width: 310px;
+    width: 100%;
     text-align: center;
+    color: black;
+}
+.taskselector input:focus{
+    height: 25px !important;
+}
+.taskselector button{
+    border: 1px solid black;
+    border-radius: 6px;
+    width: 20px;
+    height: 20px;
+    filter: brightness(0.9);
+    font-size: 16px;
+    text-align: center;
+}
+.taskselector button span{
+    position: relative;
+    bottom: 2px;
 }
 .task-header{
     width: 100%;
@@ -418,7 +431,8 @@ select{
     align-items: center;
 }
 .timerbuttons button{
-    background-color: transparent;
+    background-color: var(--header-color);
+    border-radius: 10px;
 }
 .select-button{
     height: 25px;
@@ -613,6 +627,10 @@ select{
     width: 200px;
     text-align: center;
 }
+.settings-timercardbody input{
+    background-color: transparent;
+    color: white;
+}
 .container-tasks{
     width: 310px;
     height: 285px;
@@ -679,6 +697,7 @@ select{
 }
 .login-container input{
     padding-left: 6px;
+    border: 1px solid rgba(0,0,0,0.2);
 }
 .signup-button{
     background-color: #584DEF;
@@ -857,7 +876,6 @@ select{
     height: 300px;
 }
 #loginForm input{
-    background-color: #D2D2D2;
     color: rgba(0, 0, 0, 1);
 }
 #acquisitions{

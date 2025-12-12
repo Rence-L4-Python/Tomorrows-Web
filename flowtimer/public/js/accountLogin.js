@@ -16,7 +16,6 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     const data = await response.json();
     if (response.ok) {
         alert('Login successful!');
-        // Redirect to another page or perform any other actions
     } else {
         document.getElementById('errorMessage').textContent = data.error;
     }
@@ -25,17 +24,3 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
       window.location.href = "/flowtimer";
     }
 })
-
-// function onSuccess(googleUser){
-//     console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-// }
-// function onFailure(error){
-//     gapi.signin2.render('my-signin2', {
-//         'scope': 'profile-email',
-//         'width': 240,
-//         'height': 50,
-//         'longtitle': true,
-//         'onsuccess': onSuccess,
-//         'onfailure': onFailure
-//     });
-// }

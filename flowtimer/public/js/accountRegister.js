@@ -1,3 +1,4 @@
+// registration form
 document.addEventListener('DOMContentLoaded', async () => {
     if (document.getElementById('userTableBody')) {
         await loadUsers();
@@ -9,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            await fetch('/users', {
+            const response = await fetch('/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -17,7 +18,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                 body: JSON.stringify({ email, password })
             });
 
-            window.location.href = 'index.html';
+            const data = await response.json();
+
+            if (response.ok){
+                alert('Registration successful!');
+                window.location.href = '/flowtimer';    
+            }
+            else{
+                document.getElementById('errorMessage').textContent = data.error;
+            }
         });
     }
 

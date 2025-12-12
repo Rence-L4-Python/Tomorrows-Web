@@ -1,4 +1,5 @@
 import { settingsHelper, loadSettings } from "./settings.js";
+import { playAudio } from "./audioSFX.js";
 
 let timerInterval = null;
 let isRunning = false;
@@ -41,6 +42,7 @@ export function startTimer(){
       clearInterval(timerInterval);
       isRunning = false;
       playButton.querySelector('img').src = 'media/play-button.svg';
+      playAudio();
 
       if (timerSelect.value !== 'timer-countdown'){
         showSessionFinishModal(sessionNumber);
@@ -79,6 +81,7 @@ function restartTimer(){
     circle.setText(formatTime(remainingTime));
     isRunning = false;
     playButton.querySelector('img').src = 'media/play-button.svg';
+    playAudio();
     
     if (timerSelect.value !== 'timer-countdown'){
       showSessionFinishModal(sessionNumber);
@@ -149,7 +152,7 @@ function restartTimer(){
     circle.set(0);
   }
 
-    function getTimerDuration(selected){
+  function getTimerDuration(selected){
     switch(selected){
       case "timer-flowmodoro":
         return 0;
