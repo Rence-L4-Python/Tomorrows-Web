@@ -4,24 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Mono|Nunito">
 </head>
 <body>
-    <div class="admin-container">
-        <h2>Admin Panel</h2>
-        <a href="add-user.html">Add User</a>
-        <table>
-            <thead>
-                <tr>
-                    <th>Email</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="userTableBody">
-                <!-- User rows will be inserted here -->
-            </tbody>
-        </table>
-    </div>
+    <main>
+        <div class="admin-container">
+            <h1>Admin Panel</h1>
+            <div class="admin-container-content">
+            <div class="styletobutton mt-32">
+                <a href="/index.html">Home</a>
+                <a href="add-user.html">Add User</a>
+            </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTableBody">
+                        <!-- User rows will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>

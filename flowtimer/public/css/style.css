@@ -892,6 +892,9 @@ select{
     position: fixed;
     bottom: 34%;
 }
+#account-modal button{
+    border: none;
+}
 @media only screen and (min-width: 1024px){
     footer{
         height: 100px;

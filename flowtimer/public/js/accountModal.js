@@ -10,6 +10,13 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!tooltipClone) {
         tooltipClone = template.content.cloneNode(true);
         accountModal.appendChild(tooltipClone);
+
+        const signoutbtn = document.getElementById('signout');
+          if (signoutbtn) {
+            signoutbtn.addEventListener('click', () => {
+              window.location.replace("/index.html");
+          })
+        }
       }
     })
   }

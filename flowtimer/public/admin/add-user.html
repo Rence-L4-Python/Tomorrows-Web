@@ -4,18 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add User</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Mono|Nunito">
 </head>
 <body>
-    <div class="admin-container">
-        <h2>Add User</h2>
-        <form id="addUserForm">
-            <input type="text" id="name" placeholder="Name" required>
-            <input type="email" id="email" placeholder="Email" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <button type="submit">Add User</button>
-        </form>
-    </div>
+    <main>
+        <div class="admin-container">
+            <h1>Add User</h1>
+            <div class="admin-container-content">
+            <div class="styletobutton">
+                <a href="admin.html" class="mt-32">Back</a> 
+            </div>
+                <form id="addUserForm">
+                    <input type="email" id="email" placeholder="Email" required>
+                    <input type="password" id="password" placeholder="Password" required>
+                    <button type="submit">Add User</button>
+                </form>
+            </div>
+        </div>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>

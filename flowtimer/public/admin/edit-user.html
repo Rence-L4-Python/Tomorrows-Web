@@ -4,19 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit User</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Mono|Nunito">
 </head>
 <body>
-    <div class="admin-container">
-        <h2>Edit User</h2>
-        <form id="editUserForm">
-            <input type="hidden" id="userId">
-            <input type="text" id="name" placeholder="Name" required>
-            <input type="email" id="email" placeholder="Email" required>
-            <input type="password" id="password" placeholder="Password">
-            <button type="submit">Update User</button>
-        </form>
-    </div>
+    <main>
+        <div class="admin-container">
+            <h1>Edit User</h1>
+            <div class="admin-container-content">
+            <div class="styletobutton">
+                <a href="admin.html" class="mt-32">Back</a>
+            </div>
+                <form id="editUserForm">
+                    <input type="hidden" id="userId">
+                    <input type="email" id="email" placeholder="Email" required>
+                    <input type="password" id="password" placeholder="Password">
+                    <button type="submit">Update User</button>
+                </form>
+            </div>
+        </div>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>
