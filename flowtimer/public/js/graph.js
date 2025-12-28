@@ -1,3 +1,5 @@
+import { helpers } from './helpcounter.js';
+
 let chartInstance = null;
 const now = new Date();
 const year = now.getFullYear();
@@ -11,7 +13,7 @@ const dailyData = Array.from({ length: 24 }, (_, hour) => {
 
   return{
     time: `${start}:00-${end}:00`,
-    worktime: 0,
+    worktime: Math.floor(Math.random() * 61), // placeholder random data
   }
 });
 
@@ -24,15 +26,15 @@ const monthNames = [
 
 const weeklyData = weekdayNames.map(day => ({
   time: day,
-  worktime: 0,
+  worktime: Math.floor(Math.random() * 421), // placeholder random data
 }))
 const monthlyData = Array.from({ length: daysInMonth }, (_, i) => ({
   time: `Day ${i + 1}`,
-  worktime: 0,
+  worktime: Math.floor(Math.random() * 421), // placeholder random data
 }));
 const yearlyData = monthNames.map(month => ({
   time: month,
-  worktime: 0,
+  worktime: Math.floor(Math.random() * 12631), // placeholder random data
 }))
 
 function getDaysInMonth(year, month){
@@ -41,6 +43,21 @@ function getDaysInMonth(year, month){
 
 //////////
 
+function currentDateInfo(){
+  const format = now.toLocaleDateString(undefined, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+  document.getElementById('currentworkday').textContent = `(${format})`;
+}
+
+function loadDatafromHelpers(){
+  document.getElementById('numtaskcompleted').textContent = `${helpers.tasksCompleted}`;
+  document.getElementById('longestfocustime').textContent = `${helpers.longestFocusTime}`;
+}
+
+//////////
 export function renderGraph(type = 'daily'){
   const ctx = document.getElementById('acquisitions');
 
@@ -79,4 +96,8 @@ export function renderGraph(type = 'daily'){
   });
 }
 
-window.addEventListener('DOMContentLoaded', () => renderGraph('daily'));
+window.addEventListener('DOMContentLoaded', () => {
+  renderGraph('daily');
+  currentDateInfo();
+  loadDatafromHelpers();
+})

@@ -1,0 +1,25 @@
+export const helpers = {
+    totalTimeWorked: 0,
+    tasksCompleted: 0,
+    longestFocusTime: 0,
+}
+
+export function saveHelpers(){
+    localStorage.setItem('helpers', JSON.stringify(helpers));
+}
+export function loadHelpers(){
+    const data = localStorage.getItem('helpers');
+    if (data){
+        Object.assign(helpers, JSON.parse(data));
+    }
+}
+
+export function constHelpers(key, defaultValue){
+    loadHelpers();
+    if (helpers[key] !== undefined){
+        return helpers[key];
+    }
+    else{
+        return defaultValue;
+    }
+}

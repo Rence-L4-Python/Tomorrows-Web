@@ -7,3 +7,5 @@ import './graphChange.js';
 import './settingsChange.js';
 import './crudFeature.js';
 import './audioSFX.js';
+import './helpcounter.js';
+import './guidePopup.js';

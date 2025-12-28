@@ -23,7 +23,7 @@
         </nav>
         <aside>
             <div class="sidebar">
-                <div class="sidebar-item">
+                <div class="sidebar-item lowopac">
                     <img src="media/flowtimer-icon.svg" alt="Flowtimer">
                 </div>
                 <div class="sidebar-middle">
@@ -103,6 +103,14 @@
                 <ul class="taskpop-wrapper" id="task-list">
                 </ul>
             </div>
+            <div id="guide-popup" class="hidden">
+                <button id="closehelpguide">X</button>
+                <div class="guidearea">
+
+                </div>
+                <div class="darkenscreen"></div>
+            </div>
+            <button id="helpguide-btn">Help / Guide</button>
         </main>
         <!--templates for javascript to show-->
         <template id="account-template">
@@ -126,6 +134,9 @@
                     <span>0</span>m
                 </div>
             </li>
+        </template>
+        <template id="session-finish-popup">
+            <div id=session-finish-popup-content><p>Session finished!</p></div>
         </template>
         <template id="session-finish-template">
             <div class="modal-overlay">

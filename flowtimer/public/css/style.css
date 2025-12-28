@@ -52,6 +52,7 @@ html{
 .hidden{display: none;}
 .transparent{opacity: 0;}
 .lowopac{opacity: 0.25;}
+.darkenscreen{background-color: black; opacity: 0.25; height: 100%; width: 100%; position: fixed; top: 0; left: 0;}
 
 .basicwrapper:nth-child(1){
     transform: translateY(-140px);
@@ -329,8 +330,8 @@ input{
 .taskselector button{
     border: 1px solid black;
     border-radius: 6px;
-    width: 20px;
-    height: 20px;
+    width: var(--m);
+    height: var(--m);
     filter: brightness(0.9);
     font-size: 16px;
     text-align: center;
@@ -374,8 +375,8 @@ input{
 }
 .task-item button{
     border-radius: 6px;
-    width: 20px;
-    height: 20px;
+    width: var(--m);
+    height: var(--m);
     font-family: monospace;
 }
 .task-item button:nth-child(1) span{
@@ -667,8 +668,8 @@ select{
     letter-spacing: 0.5px;
 }
 .taskpop-wrapper button{
-    height: 20px;
-    width: 20px;
+    height: var(--m);
+    width: var(--m);
     border: 1px solid black;
 }
 .section-1{
@@ -696,7 +697,7 @@ select{
     align-items: center;
 }
 .login-container input{
-    padding-left: 6px;
+    padding-left: var(--xs);
     border: 1px solid rgba(0,0,0,0.2);
 }
 .signup-button{
@@ -862,6 +863,19 @@ select{
     margin-bottom: var(--m);
 }
 
+.guidearea{
+    position: absolute;
+    width: 380px;
+    height: 600px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px dotted rgba(255,255,255,0.2);
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.5) rgba(0,0,0,0.1);
+}
+
 #restart-modal:hover .overlay-tooltip, #play-modal:hover .overlay-tooltip, #finish-modal:hover .overlay-tooltip{
     visibility: visible;
     transform: translateY(0);
@@ -895,6 +909,83 @@ select{
 #account-modal button{
     border: none;
 }
+
+#guide-popup{
+    position: absolute;
+    height: 700px;
+    width: 500px;
+    background-color: #252525;
+    border: 2px solid white;
+    border-radius: var(--m);
+    font-size: 14px;
+}
+
+#session-finish-popup-content{
+    position: absolute;
+    height: 40px;
+    white-space: nowrap;
+    width: max-content;
+    background-color: #252525;
+    border: 2px solid white;
+    border-radius: var(--m);
+    left: var(--xxl);
+    bottom: var(--l);
+    padding-left: var(--xs);
+    padding-right: var(--xs);
+    color: white;
+    display: flex;
+    align-items: center;
+    animation: slideIn 0.4s ease;
+}
+
+#session-finish-popup-content.hide{
+    animation: slideOut 0.4s ease forwards;
+}
+
+#closehelpguide{
+    position: absolute;
+    top: var(--xs);
+    left: var(--xs);
+    color: white;
+    z-index: 999;
+}
+
+#helpguide-btn{
+    background-color: #252525;
+    border: 2px solid white;
+    border-radius: var(--m);
+    font-size: 14px;
+    position: absolute;
+    right: var(--l);
+    bottom: var(--l);
+    height: 40px;
+    padding-left: var(--s);
+    padding-right: var(--s);
+    color: white;
+}
+
+@keyframes slideIn{
+    0%{
+        transform: translateX(-200px);
+        opacity: 0;
+    }
+    100%{
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut{
+    0%{
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100%{
+        transform: translateX(-200px);
+        opacity: 0;
+    }
+}
+
 @media only screen and (min-width: 1024px){
     footer{
         height: 100px;

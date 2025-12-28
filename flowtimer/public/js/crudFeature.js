@@ -1,4 +1,5 @@
 import {startTimer, pauseTimer} from './timer.js';
+import {helpers} from './helpcounter.js';
 
 window.addEventListener('DOMContentLoaded', () =>{
     const addButton = document.getElementById('add-task');
@@ -14,6 +15,8 @@ window.addEventListener('DOMContentLoaded', () =>{
 
     initialText.value = 'Sample Task';
     initialFinish.addEventListener('click', () =>{
+        helpers.tasksCompleted++;
+        console.log(helpers.tasksCompleted);
         initialTaskItem.remove();
     })
     initialTrack.addEventListener('click', () =>{
@@ -45,6 +48,8 @@ window.addEventListener('DOMContentLoaded', () =>{
         taskText.value = value;
 
         finishButton.addEventListener('click', () =>{
+            helpers.tasksCompleted++;
+            console.log(helpers.tasksCompleted);    
             taskItem.remove();
         })
 

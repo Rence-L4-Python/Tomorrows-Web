@@ -1,5 +1,6 @@
 import { settingsHelper, loadSettings } from "./settings.js";
 import { playAudio } from "./audioSFX.js";
+import { sessionfinishPopup } from "./sessionfinishPopup.js";
 
 let timerInterval = null;
 let isRunning = false;
@@ -34,6 +35,14 @@ export function startTimer(){
   playButton.querySelector('img').src = 'media/pause-button.svg';
 
   timerInterval = setInterval(function(){
+
+    if (isFlowmodoro()){
+      remainingTime++;
+      circle.set(0);
+      circle.setText(formatTime(remainingTime));
+      return;
+    }
+
     circle.set(1 - remainingTime / totalTime);
     circle.setText(formatTime(remainingTime));
 
@@ -42,7 +51,9 @@ export function startTimer(){
       clearInterval(timerInterval);
       isRunning = false;
       playButton.querySelector('img').src = 'media/play-button.svg';
+      
       playAudio();
+      sessionfinishPopup();
 
       if (timerSelect.value !== 'timer-countdown'){
         showSessionFinishModal(sessionNumber);
@@ -87,6 +98,7 @@ function restartTimer(){
       showSessionFinishModal(sessionNumber);
       sessionNumber++;
     }
+    sessionfinishPopup();
   }
 
   // when finished, display a message/modal that the timer is complete. Should be clicked to dismiss.
@@ -163,6 +175,10 @@ function restartTimer(){
       default:
         return 0;
     }
+  }
+
+  function isFlowmodoro(){
+    return timerSelect.value === 'timer-flowmodoro';
   }
 
 // attempt at reworking
