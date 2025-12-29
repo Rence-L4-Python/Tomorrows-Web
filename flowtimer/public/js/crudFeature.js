@@ -1,5 +1,6 @@
 import {startTimer, pauseTimer} from './timer.js';
 import {helpers} from './helpcounter.js';
+import { isFinished } from './timer.js';
 
 window.addEventListener('DOMContentLoaded', () =>{
     const addButton = document.getElementById('add-task');
@@ -22,6 +23,9 @@ window.addEventListener('DOMContentLoaded', () =>{
     initialTrack.addEventListener('click', () =>{
         const span = initialTrack.querySelector('span');
         if (initialTrack.textContent === "▶"){
+            if (isFinished){ // stops button from working if timer is finished so it works like in timer.js
+                return;
+            }
             span.textContent = "⏸";
             startTimer();
             return;
@@ -57,6 +61,9 @@ window.addEventListener('DOMContentLoaded', () =>{
             const span = trackButton.querySelector('span');
 
             if (trackButton.textContent === "▶"){
+                if (isFinished){ // stops button from working if timer is finished so it works like in timer.js
+                    return;
+                }
                 span.textContent = "⏸";
                 startTimer();
                 return;

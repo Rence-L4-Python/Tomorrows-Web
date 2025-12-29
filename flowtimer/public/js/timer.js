@@ -1,9 +1,11 @@
 import { settingsHelper, loadSettings } from "./settings.js";
 import { playAudio } from "./audioSFX.js";
 import { sessionfinishPopup } from "./sessionfinishPopup.js";
+import { timertoast } from "./timertoast.js";
 
 let timerInterval = null;
 let isRunning = false;
+export let isFinished = false;
 let remainingTime;
 let totalTime;
 let circle = null;
@@ -26,6 +28,10 @@ function formatTime(seconds){
 
 // start timer
 export function startTimer(){
+  if (isFinished){ // stops user from repeating clicks. they have to click the restart button for the buttons to work again
+    timertoast();
+    return;
+  }
   if (isRunning){
     pauseTimer();
     return;
@@ -36,10 +42,10 @@ export function startTimer(){
 
   timerInterval = setInterval(function(){
 
-    if (isFlowmodoro()){
+    if (isFlowmodoro()){ // compared to the other timers, flowmodoro counts up instead of down
       remainingTime++;
-      circle.set(0);
-      circle.setText(formatTime(remainingTime));
+      circle.set(0); // circle should be static for flowmodoro since it has no set duration
+      circle.setText(formatTime(remainingTime)); // update time display counting up
       return;
     }
 
@@ -50,6 +56,7 @@ export function startTimer(){
       remainingTime = 0;
       clearInterval(timerInterval);
       isRunning = false;
+      isFinished = true;
       playButton.querySelector('img').src = 'media/play-button.svg';
       
       playAudio();
@@ -81,16 +88,22 @@ function restartTimer(){
   circle.set(0);
   circle.setText(formatTime(remainingTime));
   isRunning = false;
+  isFinished = false;
   playButton.querySelector('img').src = 'media/play-button.svg';
 }
 
   // finish timer
   function finishTimer(){
+    if (isFinished){ // stops user from repeating clicks. they have to click the restart button for the buttons to work again
+      timertoast();
+      return;
+    }
     clearInterval(timerInterval);
     remainingTime = 0;
     circle.set(1);
     circle.setText(formatTime(remainingTime));
     isRunning = false;
+    isFinished = true;
     playButton.querySelector('img').src = 'media/play-button.svg';
     playAudio();
     
@@ -136,7 +149,7 @@ function restartTimer(){
     }
   }
 
-  // init progress bar circle
+  // initialize progress bar circle
 
   function initializeCircle(){
     circle = new ProgressBar.Circle(container, {

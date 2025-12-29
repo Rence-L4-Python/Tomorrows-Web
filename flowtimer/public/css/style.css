@@ -920,7 +920,7 @@ select{
     font-size: 14px;
 }
 
-#session-finish-popup-content{
+#session-finish-popup-content, #timer-toast{
     position: absolute;
     height: 40px;
     white-space: nowrap;
@@ -938,7 +938,7 @@ select{
     animation: slideIn 0.4s ease;
 }
 
-#session-finish-popup-content.hide{
+#session-finish-popup-content.hide, #timer-toast.hide{
     animation: slideOut 0.4s ease forwards;
 }
 
