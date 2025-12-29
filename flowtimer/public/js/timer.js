@@ -6,7 +6,7 @@ import { timertoast } from "./timertoast.js";
 
 let timerInterval = null;
 let isRunning = false;
-let isBreak = false;
+let isWorkSession = true;
 export let isFinished = false;
 let remainingTime;
 let totalTime;
@@ -63,7 +63,7 @@ export function startTimer(){
       
       playAudio();
 
-      if (isBreak){
+      if (!isWorkSession){
         breakfinishPopup();
         startWorkSession();
         return;
@@ -71,7 +71,7 @@ export function startTimer(){
 
       sessionfinishPopup();
 
-      if (!isBreak && timerSelect.value !== 'timer-countdown'){
+      if (isWorkSession && timerSelect.value !== 'timer-countdown'){ // 
         showSessionFinishModal(sessionNumber);
         sessionNumber++;
       }
@@ -107,15 +107,25 @@ function restartTimer(){
       timertoast();
       return;
     }
+
     clearInterval(timerInterval);
+    isRunning = false;
+    playButton.querySelector('img').src = 'media/play-button.svg';
+
+    if (isFlowmodoro()){
+      const fmRatio = settingsHelper('fmRatio');
+      const breakLength = Math.floor(remainingTime / fmRatio);
+
+      startFlowmodoroBreak(breakLength);
+      return;
+    }
+
     remainingTime = 0;
     circle.set(1);
     circle.setText(formatTime(remainingTime));
-    isRunning = false;
     isFinished = true;
-    playButton.querySelector('img').src = 'media/play-button.svg';
     playAudio();
-    
+
     if (timerSelect.value !== 'timer-countdown'){
       showSessionFinishModal(sessionNumber);
       sessionNumber++;
@@ -230,12 +240,23 @@ function restartTimer(){
   }
 
   function isFlowmodoro(){
-    return timerSelect.value === 'timer-flowmodoro';
+    return timerSelect.value === 'timer-flowmodoro' && isWorkSession; // only true if timer is set to flowmodoro and not on a break
+  }
+
+  function startFlowmodoroBreak(breakLength){
+    isWorkSession = false;
+    isFinished = false;
+    isRunning = false;
+    remainingTime = breakLength;
+    totalTime = breakLength;
+    breakCircle();
+    startTimer();
+    updateworkStatus();
   }
 
   // initialize break when startBreakButton in modal is clicked
   function startBreak(){
-    isBreak = true;
+    isWorkSession = false;
     isFinished = false;
     isRunning = false;
     remainingTime = settingsHelper('pmSB');
@@ -246,7 +267,7 @@ function restartTimer(){
   }
 
   function startWorkSession(){
-    isBreak = false;
+    isWorkSession = true;
     isFinished = false;
     isRunning = false;
     remainingTime = getTimerDuration(timerSelect.value);
@@ -257,7 +278,7 @@ function restartTimer(){
 
   function updateworkStatus(){
     const statusText = document.getElementById('status-text');
-    if (isBreak){
+    if (!isWorkSession){
       statusText.textContent = "Break";
     }
     else{
