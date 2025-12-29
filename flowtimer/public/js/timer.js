@@ -3,6 +3,7 @@ import { playAudio } from "./audioSFX.js";
 import { sessionfinishPopup } from "./sessionfinishPopup.js";
 import { breakfinishPopup } from "./breakfinishPopup.js";
 import { timertoast } from "./timertoast.js";
+import { fmbreakwarningPopup } from "./fmbreakwarningPopup.js";
 
 let timerInterval = null;
 let isRunning = false;
@@ -115,8 +116,14 @@ function restartTimer(){
     if (isFlowmodoro()){
       const fmRatio = settingsHelper('fmRatio');
       const breakLength = Math.floor(remainingTime / fmRatio);
-
-      startFlowmodoroBreak(breakLength);
+    
+      if (remainingTime >= 60){ // you can only finish a flowmodoro session if you've done at least 1 minute. if not, you can't press the finish button
+        sessionfinishPopup();
+        startFlowmodoroBreak(breakLength);
+      }
+      else{
+        fmbreakwarningPopup();
+      }
       return;
     }
 

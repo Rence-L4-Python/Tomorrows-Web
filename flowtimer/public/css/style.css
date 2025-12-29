@@ -935,7 +935,7 @@ select{
 
 }
 
-#session-finish-popup-content, #timer-toast, #break-finish-popup-content{
+#session-finish-popup-content, #timer-toast, #break-finish-popup-content, #fmbreak-warning-popup-content{
     position: fixed;
     height: 40px;
     white-space: nowrap;
@@ -953,7 +953,7 @@ select{
     animation: slideIn 0.4s ease;
 }
 
-#session-finish-popup-content.hide, #timer-toast.hide, #break-finish-popup-content.hide{
+#session-finish-popup-content.hide, #timer-toast.hide, #break-finish-popup-content.hide, #fmbreak-warning-popup-content.hide{
     animation: slideOut 0.4s ease forwards;
 }
 
