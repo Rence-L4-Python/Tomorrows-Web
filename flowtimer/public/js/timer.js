@@ -1,10 +1,12 @@
 import { settingsHelper, loadSettings } from "./settings.js";
 import { playAudio } from "./audioSFX.js";
 import { sessionfinishPopup } from "./sessionfinishPopup.js";
+import { breakfinishPopup } from "./breakfinishPopup.js";
 import { timertoast } from "./timertoast.js";
 
 let timerInterval = null;
 let isRunning = false;
+let isBreak = false;
 export let isFinished = false;
 let remainingTime;
 let totalTime;
@@ -60,9 +62,16 @@ export function startTimer(){
       playButton.querySelector('img').src = 'media/play-button.svg';
       
       playAudio();
+
+      if (isBreak){
+        breakfinishPopup();
+        startWorkSession();
+        return;
+      }
+
       sessionfinishPopup();
 
-      if (timerSelect.value !== 'timer-countdown'){
+      if (!isBreak && timerSelect.value !== 'timer-countdown'){
         showSessionFinishModal(sessionNumber);
         sessionNumber++;
       }
@@ -152,10 +161,40 @@ function restartTimer(){
   // initialize progress bar circle
 
   function initializeCircle(){
+    container.innerHTML = '';
+
     circle = new ProgressBar.Circle(container, {
       strokeWidth: 3,
       trailWidth: 3,
       color: '#00bcd4',
+      trailColor: '#FFF',
+      easing: 'linear',
+      duration: 1000,
+      text:{
+        value: formatTime(remainingTime),
+        className: 'progress-text',
+        style: {
+          color: '#FFFFFF',
+          position: 'absolute',
+          left: '50%',
+          top: '50%',
+          padding: 0,
+          margin: 0,
+          transform: 'translate(-50%, -50%)',
+          fontSize: '24px',
+        }
+      }
+    })
+    circle.set(0);
+  }
+
+  function breakCircle(){
+    container.innerHTML = '';
+
+    circle = new ProgressBar.Circle(container, {
+      strokeWidth: 3,
+      trailWidth: 3,
+      color: '#9fd400ff',
       trailColor: '#FFF',
       easing: 'linear',
       duration: 1000,
@@ -182,7 +221,7 @@ function restartTimer(){
       case "timer-flowmodoro":
         return 0;
       case "timer-pomodoro":
-        return settingsHelper('pmLength') * 60;
+        return settingsHelper('pmLength') ;
       case "timer-countdown":
         return settingsHelper('cdTimer');
       default:
@@ -192,6 +231,38 @@ function restartTimer(){
 
   function isFlowmodoro(){
     return timerSelect.value === 'timer-flowmodoro';
+  }
+
+  // initialize break when startBreakButton in modal is clicked
+  function startBreak(){
+    isBreak = true;
+    isFinished = false;
+    isRunning = false;
+    remainingTime = settingsHelper('pmSB');
+    totalTime = remainingTime;
+    breakCircle();
+    startTimer();
+    updateworkStatus();
+  }
+
+  function startWorkSession(){
+    isBreak = false;
+    isFinished = false;
+    isRunning = false;
+    remainingTime = getTimerDuration(timerSelect.value);
+    totalTime = remainingTime;
+    initializeCircle();
+    updateworkStatus();
+  }
+
+  function updateworkStatus(){
+    const statusText = document.getElementById('status-text');
+    if (isBreak){
+      statusText.textContent = "Break";
+    }
+    else{
+      statusText.textContent = "Working";
+    }
   }
 
 // attempt at reworking
@@ -219,9 +290,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const selected = timerSelect.value;
     updateTimerMode(selected);
   })
-
-  // initialize break when startBreakButton is clicked
-  function startBreak(){}
   
   initializeCircle();
   playButton.addEventListener('click', startTimer);

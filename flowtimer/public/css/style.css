@@ -918,10 +918,25 @@ select{
     border: 2px solid white;
     border-radius: var(--m);
     font-size: 14px;
+    z-index: 999;
 }
 
-#session-finish-popup-content, #timer-toast{
-    position: absolute;
+#current-status{
+    position: fixed;
+    bottom: 17%;
+    color: white;
+    border: 1px solid white;
+    background-color: #252525;
+    border-radius: var(--m);
+    padding-left: var(--xs);
+    padding-right: var(--xs);
+    padding-top: 4px;
+    padding-bottom: 4px;
+
+}
+
+#session-finish-popup-content, #timer-toast, #break-finish-popup-content{
+    position: fixed;
     height: 40px;
     white-space: nowrap;
     width: max-content;
@@ -938,7 +953,7 @@ select{
     animation: slideIn 0.4s ease;
 }
 
-#session-finish-popup-content.hide, #timer-toast.hide{
+#session-finish-popup-content.hide, #timer-toast.hide, #break-finish-popup-content.hide{
     animation: slideOut 0.4s ease forwards;
 }
 
@@ -955,7 +970,7 @@ select{
     border: 2px solid white;
     border-radius: var(--m);
     font-size: 14px;
-    position: absolute;
+    position: fixed;
     right: var(--l);
     bottom: var(--l);
     height: 40px;

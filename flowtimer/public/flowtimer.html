@@ -110,9 +110,13 @@
                 </div>
                 <div class="darkenscreen"></div>
             </div>
+            <div id="current-status">
+                <p>Current Status: <span id="status-text">Working</b></p>
+            </div>
             <button id="helpguide-btn">Help / Guide</button>
         </main>
-        <!--templates for javascript to show-->
+
+        <!-- ============================== templates for javascript ============================== -->
         <template id="account-template">
             <div class="tooltiptext account-tooltip">
                 <h2>Hello,</h2>
@@ -143,6 +147,11 @@
         <template id="session-finish-popup">
             <div id=session-finish-popup-content>
                 <p>Session finished!</p>
+            </div>
+        </template>
+        <template id="break-finish-popup">
+            <div id="break-finish-popup-content">
+                <p>Break time is over!</p>
             </div>
         </template>
         <template id="session-finish-template">
