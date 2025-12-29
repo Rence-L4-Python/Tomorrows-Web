@@ -31,7 +31,7 @@ const themes = [
     headerColor: '#149FE5'
   }, 
   { // Theme 5, 'Pink Gradient'
-    image: 'media/pexels-codioful.jpg',
+    image: 'media/from-nio-unsplash.jpg',
     sidebarColor: '#4169E1',
     hrColor: '#4169E1',
     hoverBgColor: '#FFFFFF',

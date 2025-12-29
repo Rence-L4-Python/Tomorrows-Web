@@ -52,7 +52,8 @@ html{
 .hidden{display: none;}
 .transparent{opacity: 0;}
 .lowopac{opacity: 0.25;}
-.darkenscreen{background-color: black; opacity: 0.25; height: 100%; width: 100%; position: fixed; top: 0; left: 0;}
+/* .darkenscreen{background-color: black; opacity: 0.05; height: 100%; width: 100%; position: fixed; top: 0; left: 0; z-index: 0;} */
+.darkerscreen{background-color: black; opacity: 0.2; height: 100%; width: 100%; position: fixed; top: 0; left: 0; z-index: 0;}
 
 .basicwrapper:nth-child(1){
     transform: translateY(-140px);
@@ -98,6 +99,7 @@ aside{
     top: 0;
     left: 0;
     bottom: 0;
+    z-index: 1;
 }
 main{
     background-size: cover;
@@ -179,6 +181,7 @@ input{
     align-items: center;
     border-radius: var(--m);
     border: 2px solid white;
+    z-index: 1;
 }
 .cardalt h1{
     font-size: 24px;
@@ -273,6 +276,7 @@ input{
     height: 1000px;
     margin: auto;
     overflow-y: auto;
+    z-index: 1;
 }
 .card-dropdown{
     display: flex;
@@ -281,6 +285,7 @@ input{
     height: 285px;
     gap: 10px;
     border-radius: 6px;
+    z-index: 1;
 }
 .card-dropdown select{
     font-size: 14px;
@@ -639,6 +644,7 @@ select{
     display: flex;
     align-items: center;
     flex-direction: column;
+    z-index: 1;
 }
 .container-login{
     height: 100%;
@@ -932,7 +938,7 @@ select{
     padding-right: var(--xs);
     padding-top: 4px;
     padding-bottom: 4px;
-
+    z-index: 1;
 }
 
 #session-finish-popup-content, #timer-toast, #break-finish-popup-content, #fmbreak-warning-popup-content{
@@ -977,6 +983,7 @@ select{
     padding-left: var(--s);
     padding-right: var(--s);
     color: white;
+    z-index: 1;
 }
 
 @keyframes slideIn{
