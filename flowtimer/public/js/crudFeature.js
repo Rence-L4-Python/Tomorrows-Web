@@ -8,6 +8,10 @@ window.addEventListener('DOMContentLoaded', () =>{
     const taskList = document.getElementById('task-list');
     const template = document.getElementById('task-template');
 
+    if (!addButton || !input || !taskList || !template){ // for fixing warnings in console logs
+        return;
+    }
+
     const initialTask = template.content.cloneNode(true);
     const initialTaskItem = initialTask.querySelector('.task-item');
     const initialText = initialTaskItem.querySelector('.task-text');

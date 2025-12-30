@@ -68,7 +68,7 @@ export function startTimer(){
 
       if (isWorkSession){
         helpers.totalTimeWorked = lastTimeWorked + elapsed;
-        
+
         if (elapsed > helpers.longestFocusTime){
           helpers.longestFocusTime = elapsed;
         }
@@ -313,6 +313,10 @@ window.addEventListener('DOMContentLoaded', () => {
   const restartButton = document.getElementById('restart-btn');
   const finishButton = document.getElementById('finish-btn');
   timerSelect = document.getElementById('timerselector');
+
+  if (!container || !playButton || !restartButton || !finishButton || !timerSelect){ // for fixing warnings in console logs
+    return;
+  }
 
   // make timer selection work and display different times based on selection
   if (timerSelect){

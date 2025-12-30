@@ -79,6 +79,10 @@ window.addEventListener('DOMContentLoaded', () =>{
     const helpguideBtn = document.getElementById('helpguide-btn');
     const closehelpguideBtn = document.getElementById('closehelpguide');
 
+    if (!helpguideBtn || !closehelpguideBtn){ // for fixing warnings in console logs
+        return;
+    }
+
     helpguideBtn.addEventListener('click', () => {
         const guidePopup = document.getElementById('guide-popup');
         guidePopup.classList.remove('hidden');

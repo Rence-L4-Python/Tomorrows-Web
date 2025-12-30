@@ -99,7 +99,7 @@ aside{
     top: 0;
     left: 0;
     bottom: 0;
-    z-index: 1;
+    z-index: 2;
 }
 main{
     background-size: cover;
@@ -986,7 +986,7 @@ select{
     z-index: 1;
 }
 
-#resetMetricsButton{
+#resetMetricsButton, #resetSettingsButton{
     background-color: #584DEF;
     border: none;
     border-radius: 6px;

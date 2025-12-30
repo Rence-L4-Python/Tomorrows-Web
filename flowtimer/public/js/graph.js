@@ -1,5 +1,5 @@
 import { helpers, loadHelpers } from './helpcounter.js';
-import { resetMetrics } from './resetMetrics.js'; 
+import { resetMetrics } from './resetValues.js'; 
 import { formatHMS } from './timeFormat.js';
 
 let chartInstance = null;
@@ -102,6 +102,11 @@ export function renderGraph(type = 'daily'){
 
 window.addEventListener('DOMContentLoaded', () => {
   const resetButton = document.getElementById('resetMetricsButton')
+
+  if (!resetButton){ // for fixing warnings in console logs
+    return;
+  }
+
   resetButton.addEventListener("click", () => {
     if (window.confirm("Do you really want to reset your data? This will clear EVERYTHING on the metrics page!")) {
       resetMetrics();
