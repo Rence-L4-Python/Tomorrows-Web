@@ -1,7 +1,7 @@
 import { settingsHelper, loadSettings } from "./settings.js";
 import { playAudio } from "./audioSFX.js";
 import { breakfinishPopup, fmbreakwarningPopup, sessionfinishPopup, timertoast } from "./popups-toasts.js"
-import { loadHelpers } from "./helpcounter.js";
+import { helpers, saveHelpers, loadHelpers } from "./helpcounter.js";
 
 let timerInterval = null;
 let isRunning = false;
@@ -13,7 +13,8 @@ let circle = null;
 let playButton = null;
 let timerSelect = null;
 let container= null;
-let sessionNumber = 1;
+let startTime = null;
+let lastTime = null;
 
 // formatting text inside timer, MM:SS format
 
@@ -41,14 +42,20 @@ export function startTimer(){
   isRunning = true;
   playButton.querySelector('img').src = 'media/pause-button.svg';
 
+  startTime = Date.now();
+  lastTime = remainingTime;
+
   timerInterval = setInterval(function(){
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
 
     if (isFlowmodoro()){ // compared to the other timers, flowmodoro counts up instead of down
-      remainingTime++;
+      remainingTime = lastTime + elapsed;
       circle.set(0); // circle should be static for flowmodoro since it has no set duration
       circle.setText(formatTime(remainingTime)); // update time display counting up
       return;
     }
+
+    remainingTime = lastTime - elapsed;
 
     circle.set(1 - remainingTime / totalTime);
     circle.setText(formatTime(remainingTime));
@@ -71,21 +78,21 @@ export function startTimer(){
       sessionfinishPopup();
 
       if (isWorkSession && timerSelect.value !== 'timer-countdown'){ // 
-        showSessionFinishModal(sessionNumber);
-        sessionNumber++;
+        showSessionFinishModal();
+        helpers.sessionNumber++;
+        saveHelpers();
       }
 
       return;
     }
-
-    remainingTime--;
-  }, 1000) // runs every second, so remainingTime decreases by 1 every second
+  }, 100) // runs every 100ms. since remainingTime is tied to JavaScript's date object, the timer should now run without any delays. previously the interval was supposed to increase remainingTime by 1 every second, but multiple events cause it to get delayed
 }
 
 // pause timer
 export function pauseTimer(){
   clearInterval(timerInterval);
   isRunning = false;
+  lastTime = remainingTime;
   playButton.querySelector('img').src = 'media/play-button.svg';
 }
 
@@ -132,14 +139,15 @@ function restartTimer(){
     playAudio();
 
     if (timerSelect.value !== 'timer-countdown'){
-      showSessionFinishModal(sessionNumber);
-      sessionNumber++;
+      showSessionFinishModal();
+      helpers.sessionNumber++;
+      saveHelpers();
     }
     sessionfinishPopup();
   }
 
   // when finished, display a message/modal that the timer is complete. Should be clicked to dismiss.
-  function showSessionFinishModal(sessionNumber){
+  function showSessionFinishModal(){
     const template = document.getElementById('session-finish-template');
     const modal = template.content.cloneNode(true);
 
@@ -150,7 +158,7 @@ function restartTimer(){
     const startBreakButton = overlay.querySelector('#start-break-btn');
     const skipBreakButton = overlay.querySelector('#skip-break-btn');
 
-    modalText.textContent = `Session ${sessionNumber} is over!`;
+    modalText.textContent = `Session ${helpers.sessionNumber + 1} is over!`;
 
     startBreakButton.addEventListener('click', () =>{
       overlay.remove();
@@ -163,7 +171,7 @@ function restartTimer(){
     })
   }
 
-    function updateTimerMode(selected){
+  function updateTimerMode(selected){
     remainingTime = getTimerDuration(selected);
     totalTime = remainingTime;
 
@@ -203,6 +211,8 @@ function restartTimer(){
     circle.set(0);
   }
 
+  // override working circle for the break circle
+  
   function breakCircle(){
     container.innerHTML = '';
 
@@ -248,7 +258,7 @@ function restartTimer(){
     return timerSelect.value === 'timer-flowmodoro' && isWorkSession; // only true if timer is set to flowmodoro and not on a break
   }
 
-  function startFlowmodoroBreak(breakLength){
+  function startFlowmodoroBreak(breakLength){ // break length is tied to time worked divided by fmRatio in settings
     isWorkSession = false;
     isFinished = false;
     isRunning = false;

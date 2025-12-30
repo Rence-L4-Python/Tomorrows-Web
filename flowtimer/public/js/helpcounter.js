@@ -2,6 +2,7 @@ export const helpers = {
     totalTimeWorked: 0,
     tasksCompleted: 0,
     longestFocusTime: 0,
+    sessionNumber: 0,
 }
 
 export function saveHelpers(){

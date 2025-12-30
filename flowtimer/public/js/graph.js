@@ -56,6 +56,7 @@ function currentDateInfo(){
 function loadDatafromHelpers(){
   document.getElementById('numtaskcompleted').textContent = `${helpers.tasksCompleted}`;
   document.getElementById('longestfocustime').textContent = `${helpers.longestFocusTime}`;
+  document.getElementById('amntsessions').textContent = `${helpers.sessionNumber}`;
 }
 
 //////////
