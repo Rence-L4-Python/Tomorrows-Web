@@ -1,5 +1,5 @@
-import {startTimer, pauseTimer} from './timer.js';
-import {helpers} from './helpcounter.js';
+import { startTimer, pauseTimer } from './timer.js';
+import { helpers, saveHelpers } from './helpcounter.js';
 import { isFinished } from './timer.js';
 
 window.addEventListener('DOMContentLoaded', () =>{
@@ -17,6 +17,7 @@ window.addEventListener('DOMContentLoaded', () =>{
     initialText.value = 'Sample Task';
     initialFinish.addEventListener('click', () =>{
         helpers.tasksCompleted++;
+        saveHelpers();
         console.log(helpers.tasksCompleted);
         initialTaskItem.remove();
     })
@@ -53,6 +54,7 @@ window.addEventListener('DOMContentLoaded', () =>{
 
         finishButton.addEventListener('click', () =>{
             helpers.tasksCompleted++;
+            saveHelpers();
             console.log(helpers.tasksCompleted);    
             taskItem.remove();
         })

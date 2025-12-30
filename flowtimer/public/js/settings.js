@@ -1,4 +1,4 @@
-let settings = {
+export const settings = {
     fmRatio: 5, // Flowmodoro Ratio
     cdTimer: 60, // Countdown Timer
     pmLength: 25, // Pomodoro Length
@@ -8,8 +8,6 @@ let settings = {
     themeIndex: 0, // Background image
     currentTimerType: 'timer-flowmodoro' // Default timer
 }
-
-export{settings};
 
 // localStorage functionalities for the app to work
 export function saveSettings(){

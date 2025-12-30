@@ -4,6 +4,7 @@ import { sessionfinishPopup } from "./sessionfinishPopup.js";
 import { breakfinishPopup } from "./breakfinishPopup.js";
 import { timertoast } from "./timertoast.js";
 import { fmbreakwarningPopup } from "./fmbreakwarningPopup.js";
+import { loadHelpers } from "./helpcounter.js";
 
 let timerInterval = null;
 let isRunning = false;
@@ -297,6 +298,7 @@ function restartTimer(){
 
 window.addEventListener('DOMContentLoaded', () => {
   loadSettings(); 
+  loadHelpers();
 
   container = document.querySelector('#timer');
   playButton = document.getElementById('play-btn');

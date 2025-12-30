@@ -986,6 +986,21 @@ select{
     z-index: 1;
 }
 
+#resetMetricsButton{
+    background-color: #584DEF;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    height: 30px;
+    width: fit-content;
+    padding-left: var(--xs);
+    padding-right: var(--xs);
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    font-family: "Nunito", sans-serif;
+}
+
 @keyframes slideIn{
     0%{
         transform: translateX(-200px);
