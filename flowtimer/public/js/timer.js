@@ -1,9 +1,6 @@
 import { settingsHelper, loadSettings } from "./settings.js";
 import { playAudio } from "./audioSFX.js";
-import { sessionfinishPopup } from "./sessionfinishPopup.js";
-import { breakfinishPopup } from "./breakfinishPopup.js";
-import { timertoast } from "./timertoast.js";
-import { fmbreakwarningPopup } from "./fmbreakwarningPopup.js";
+import { breakfinishPopup, fmbreakwarningPopup, sessionfinishPopup, timertoast } from "./popups-toasts.js"
 import { loadHelpers } from "./helpcounter.js";
 
 let timerInterval = null;
