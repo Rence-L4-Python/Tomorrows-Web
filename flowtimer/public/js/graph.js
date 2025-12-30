@@ -1,5 +1,6 @@
 import { helpers, loadHelpers } from './helpcounter.js';
 import { resetMetrics } from './resetMetrics.js'; 
+import { formatHMS } from './timeFormat.js';
 
 let chartInstance = null;
 const now = new Date();
@@ -54,9 +55,10 @@ function currentDateInfo(){
 }
 
 function loadDatafromHelpers(){
-  document.getElementById('numtaskcompleted').textContent = `${helpers.tasksCompleted}`;
-  document.getElementById('longestfocustime').textContent = `${helpers.longestFocusTime}`;
-  document.getElementById('amntsessions').textContent = `${helpers.sessionNumber}`;
+  document.getElementById('timeworked').textContent = formatHMS(helpers.totalTimeWorked);
+  document.getElementById('numtaskcompleted').textContent = helpers.tasksCompleted;
+  document.getElementById('longestfocustime').textContent = formatHMS(helpers.longestFocusTime);
+  document.getElementById('amntsessions').textContent = helpers.sessionNumber;
 }
 
 //////////

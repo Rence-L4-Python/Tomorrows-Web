@@ -2,6 +2,7 @@ import { settingsHelper, loadSettings } from "./settings.js";
 import { playAudio } from "./audioSFX.js";
 import { breakfinishPopup, fmbreakwarningPopup, sessionfinishPopup, timertoast } from "./popups-toasts.js"
 import { helpers, saveHelpers, loadHelpers } from "./helpcounter.js";
+import { formatTime } from "./timeFormat.js";
 
 let timerInterval = null;
 let isRunning = false;
@@ -15,18 +16,7 @@ let timerSelect = null;
 let container= null;
 let startTime = null;
 let lastTime = null;
-
-// formatting text inside timer, MM:SS format
-
-function formatTime(seconds){
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-
-    const mm = String(mins).padStart(2, '0');
-    const ss = String(secs).padStart(2, '0');
-
-    return `${mm}:${ss}`;
-  }
+let lastTimeWorked = null;
 
 // start timer
 export function startTimer(){
@@ -44,6 +34,7 @@ export function startTimer(){
 
   startTime = Date.now();
   lastTime = remainingTime;
+  lastTimeWorked = helpers.totalTimeWorked;
 
   timerInterval = setInterval(function(){
     const elapsed = Math.floor((Date.now() - startTime) / 1000);
@@ -73,6 +64,16 @@ export function startTimer(){
         breakfinishPopup();
         startWorkSession();
         return;
+      }
+
+      if (isWorkSession){
+        helpers.totalTimeWorked = lastTimeWorked + elapsed;
+        
+        if (elapsed > helpers.longestFocusTime){
+          helpers.longestFocusTime = elapsed;
+        }
+
+        saveHelpers();
       }
 
       sessionfinishPopup();
