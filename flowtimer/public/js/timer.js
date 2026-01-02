@@ -321,7 +321,18 @@ function restartTimer(){
     isWorkSession = false;
     isFinished = false;
     isRunning = false;
-    remainingTime = settingsHelper('pmSB');
+
+    const sessionsBeforeLongBreak = settingsHelper('pmSesh');
+    const shortBreak = settingsHelper('pmSB');
+    const longBreak = settingsHelper('pmLB');
+
+    if (helpers.sessionNumber > 0 && helpers.sessionNumber % sessionsBeforeLongBreak == 0){
+      remainingTime = longBreak;
+    }
+    else{
+      remainingTime = shortBreak;
+    }
+
     totalTime = remainingTime;
     breakCircle();
     startTimer();
