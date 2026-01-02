@@ -34,10 +34,12 @@ export function startTimer(){
     timertoast();
     return;
   }
-  
   if (isRunning){
     pauseTimer();
     return;
+  }
+  if (isWorkSession){
+    trackTaskTime();
   }
 
   isRunning = true;
@@ -46,8 +48,6 @@ export function startTimer(){
   startTime = Date.now();
   lastTime = remainingTime;
   lastTimeWorked = helpers.totalTimeWorked;
-
-  trackTaskTime();
 
   timerInterval = setInterval(function(){
     const elapsed = Math.floor((Date.now() - startTime) / 1000);
@@ -124,11 +124,7 @@ function restartTimer(){
 }
 
   // finish timer
-  function finishTimer(){
-    if (!isWorkSession){
-      startWorkSession();
-    }
-    
+  function finishTimer(){    
     if (isFinished){ // stops user from repeating clicks. they have to click the restart button for the buttons to work again
       timertoast();
       return;
