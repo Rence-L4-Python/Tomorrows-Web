@@ -124,7 +124,12 @@ function restartTimer(){
 }
 
   // finish timer
-  function finishTimer(){    
+  function finishTimer(){
+    const activeTask = document.querySelector('.task-item.active-task');
+    if (!activeTask){
+      starttimerPopup();
+      return;
+    }
     if (isFinished){ // stops user from repeating clicks. they have to click the restart button for the buttons to work again
       timertoast();
       return;
