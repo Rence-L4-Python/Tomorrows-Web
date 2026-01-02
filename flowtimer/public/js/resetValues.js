@@ -1,6 +1,6 @@
 import { helpers, saveHelpers } from "./helpcounter.js";
 import { saveSettings, settings } from "./settings.js";
-import { dailyData, weeklyData, monthlyData, yearlyData } from "./graph.js";
+import { dailyData, weeklyData, monthlyData, yearlyData, renderGraph } from "./graph.js";
 
 export function resetMetrics(){
     helpers.totalTimeWorked = 0;
@@ -27,6 +27,8 @@ export function resetMetrics(){
     localStorage.setItem('weeklyData', JSON.stringify(weeklyData))
     localStorage.setItem('monthlyData', JSON.stringify(monthlyData))
     localStorage.setItem('yearlyData', JSON.stringify(yearlyData))
+    
+    renderGraph();
 }
 
 export function resetSettings(){
