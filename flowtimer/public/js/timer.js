@@ -3,6 +3,7 @@ import { playAudio } from "./audioSFX.js";
 import { breakfinishPopup, fmbreakwarningPopup, sessionfinishPopup, timertoast, starttimerPopup} from "./popups-toasts.js"
 import { helpers, saveHelpers, loadHelpers } from "./helpcounter.js";
 import { formatTime, formatHMS } from "./timeFormat.js";
+import { addWorkTime } from "./graphUpdate.js";
 
 let timerInterval = null;
 let isRunning = false;
@@ -80,6 +81,8 @@ export function startTimer(){
 
       if (isWorkSession){
         helpers.totalTimeWorked = lastTimeWorked + elapsed;
+
+        addWorkTime(elapsed);
 
         if (elapsed > helpers.longestFocusTime){
           helpers.longestFocusTime = elapsed;

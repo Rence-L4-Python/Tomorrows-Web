@@ -9,13 +9,13 @@ const month = now.getMonth();
 const daysInMonth = getDaysInMonth(year, month);
 //////////
 
-const dailyData = Array.from({ length: 24 }, (_, hour) => {
+export const dailyData = Array.from({ length: 24 }, (_, hour) => {
   const start = String(hour).padStart(2,'0');
   const end = String((hour + 1) % 24).padStart(2,'0');
 
   return{
     time: `${start}:00-${end}:00`,
-    worktime: Math.floor(Math.random() * 61), // placeholder random data
+    worktime: 0, 
   }
 });
 
@@ -26,21 +26,51 @@ const monthNames = [
   'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
 ]
 
-const weeklyData = weekdayNames.map(day => ({
+export const weeklyData = weekdayNames.map(day => ({
   time: day,
-  worktime: Math.floor(Math.random() * 421), // placeholder random data
+  worktime: 0,
 }))
-const monthlyData = Array.from({ length: daysInMonth }, (_, i) => ({
+export const monthlyData = Array.from({ length: daysInMonth }, (_, i) => ({
   time: `Day ${i + 1}`,
-  worktime: Math.floor(Math.random() * 421), // placeholder random data
+  worktime: 0,
 }));
-const yearlyData = monthNames.map(month => ({
+export const yearlyData = monthNames.map(month => ({
   time: month,
-  worktime: Math.floor(Math.random() * 12631), // placeholder random data
+  worktime: 0,
 }))
 
 function getDaysInMonth(year, month){
   return new Date(year, month + 1, 0).getDate();
+}
+
+//////////
+
+const savedDaily = JSON.parse(localStorage.getItem('dailyData'));
+if (savedDaily){
+  for (let i = 0; i < dailyData.length; i++){
+    dailyData[i].worktime = savedDaily[i].worktime;
+  }
+}
+
+const savedWeekly = JSON.parse(localStorage.getItem('weeklyData'));
+if (savedWeekly){
+  for (let i = 0; i < weeklyData.length; i++){
+    weeklyData[i].worktime = savedWeekly[i].worktime;
+  }
+}
+
+const savedMonthly = JSON.parse(localStorage.getItem('monthlyData'));
+if (savedMonthly){
+  for (let i = 0; i < monthlyData.length; i++){
+    monthlyData[i].worktime = savedMonthly[i].worktime;
+  }
+}
+
+const savedYearly = JSON.parse(localStorage.getItem('yearlyData'));
+if (savedYearly){
+  for (let i = 0; i < yearlyData.length; i++){
+    yearlyData[i].worktime = savedYearly[i].worktime;
+  }
 }
 
 //////////

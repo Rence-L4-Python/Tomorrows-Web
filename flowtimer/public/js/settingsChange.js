@@ -13,10 +13,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const pomosesh = document.getElementById('setting-sessions');
     const currentTimerType = document.getElementById('timerselector');
 
-    if (!flowmoratio || !countdownlength || !pomolength || !pomoshortbreak || !pomolongbreak || !pomosesh || !currentTimerType){ // for fixing warnings in console logs
-        return;
-    }
-
     function UIUpdate(){
         if (flowmoratio) flowmoratio.value = settings.fmRatio;
         if (countdownlength) countdownlength.value = formatTimeInput(settings.cdTimer);
@@ -69,6 +65,8 @@ window.addEventListener('DOMContentLoaded', () => {
     })
 
     const resetButton = document.getElementById('resetSettingsButton')
+    if (!resetButton) return; // for fixing warnings in console logs
+    
     resetButton.addEventListener("click", () => {
         if (window.confirm("Reset back settings to their default values?")){
           resetSettings();
