@@ -1,29 +1,38 @@
-import { startTimer, pauseTimer } from './timer.js';
-import { helpers, saveHelpers } from './helpcounter.js';
-import { isFinished } from './timer.js';
-import { loadTasks, saveTasks } from './tasksStorage.js';
+import { helpers, saveHelpers } from "./helpcounter.js";
+import { isFinished, startTimer, pauseTimer } from "./timer.js";
 
-window.addEventListener('DOMContentLoaded', () =>{
-    const addButton = document.getElementById('add-task');
-    const input = document.getElementById('task-input');
+export function saveTasks(){
+    const taskList = document.getElementById('task-list');
+    const tasks = [];
+    const items = taskList.querySelectorAll('.task-item');
+    items.forEach(item =>{
+        const text = item.querySelector('.task-text').value;
+        const active = item.classList.contains('active-task');
+        tasks.push({text, active});
+    })
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+export function loadTasks(){
     const taskList = document.getElementById('task-list');
     const template = document.getElementById('task-template');
 
-    if (!addButton || !input || !taskList || !template){ // for fixing warnings in console logs
-        return;
-    }
+    const saved = JSON.parse(localStorage.getItem('tasks'));
+    if (!saved) return;
 
-    addButton.addEventListener('click', () =>{
-        const value = input.value.trim();
-        if (!value) return;
-
+    saved.forEach(task =>{
         const clone = template.content.cloneNode(true);
         const taskItem = clone.querySelector('.task-item');
         const taskText = taskItem.querySelector('.task-text');
         const finishButton = taskItem.querySelector('.finishtask');
         const trackButton = taskItem.querySelector('.tracktask');
 
-        taskText.value = value;
+        taskText.value = task.text;
+
+        if (task.active){
+            taskItem.classList.add('active-task');
+        }
 
         finishButton.addEventListener('click', () =>{
             helpers.tasksCompleted++;
@@ -35,33 +44,23 @@ window.addEventListener('DOMContentLoaded', () =>{
             const span = trackButton.querySelector('span');
 
             if (trackButton.textContent === "▶"){
-                if (isFinished) return; // stops button from working if timer is finished so it works like in timer.js
+                if (isFinished) return;
 
                 const currentlyActive = document.querySelector('.task-item.active-task');
                 if (currentlyActive){
                     currentlyActive.classList.remove('active-task');
                 }
-
+                
                 taskItem.classList.add('active-task');
                 span.textContent = "⏸";
                 startTimer();
-                return;
             }
             else{
                 span.textContent = "▶";
                 pauseTimer();
-                return;
-        }
+            }
         })
 
         taskList.appendChild(clone);
-        input.value = '';
     })
-
-    input.addEventListener('keypress', (e) =>{
-        if (e.key === 'Enter') addButton.click();
-    })
-
-    setInterval(saveTasks, 1000)
-    loadTasks();
-})
+}
