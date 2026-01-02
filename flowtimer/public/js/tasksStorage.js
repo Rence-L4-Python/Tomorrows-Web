@@ -1,5 +1,6 @@
 import { helpers, saveHelpers } from "./helpcounter.js";
 import { isFinished, startTimer, pauseTimer } from "./timer.js";
+import { formatHMS } from "./timeFormat.js";
 
 export function saveTasks(){
     const taskList = document.getElementById('task-list');
@@ -8,7 +9,8 @@ export function saveTasks(){
     items.forEach(item =>{
         const text = item.querySelector('.task-text').value;
         const active = item.classList.contains('active-task');
-        tasks.push({text, active});
+        const tracked = item.querySelector('.listtimetrack').dataset.seconds || 0;
+        tasks.push({text, active, trackedSeconds: Number(tracked)});
     })
 
     localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -29,6 +31,10 @@ export function loadTasks(){
         const trackButton = taskItem.querySelector('.tracktask');
 
         taskText.value = task.text;
+
+        const listtimetrack = taskItem.querySelector('.listtimetrack');
+        listtimetrack.dataset.seconds = task.trackedSeconds;
+        listtimetrack.textContent = formatHMS(task.trackedSeconds);
 
         if (task.active){
             taskItem.classList.add('active-task');

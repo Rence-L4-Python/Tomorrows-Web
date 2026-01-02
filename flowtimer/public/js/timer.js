@@ -168,10 +168,10 @@ function restartTimer(){
 
   function trackTaskTime(){
     const activeTask = document.querySelector('.task-item.active-task');
-    if (!activeTask) return;
+    if (!activeTask && taskTrackInterval !== null) return;
 
     const listtimetrack = activeTask.querySelector('.listtimetrack');
-    if (taskTrackInterval !== null) return;
+    taskTracked = Number(listtimetrack.dataset.seconds) || 0;
 
     taskTrackstartTime = Date.now();
     taskTracklastTime = taskTracked;
@@ -188,6 +188,7 @@ function restartTimer(){
       const timetracked = taskTracklastTime + elapsed;
 
       listtimetrack.textContent = formatHMS(timetracked);
+      listtimetrack.dataset.seconds = timetracked;
     }, 100)
   }
 
