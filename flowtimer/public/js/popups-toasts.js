@@ -74,6 +74,25 @@ export function timertoast(){
     }, 4000)
 }
 
+export function starttimerPopup(){
+    /// prevents popups from stacking
+    if (document.querySelector('#start-timer-popup-content')){
+        return
+    }
+
+    const popupTemplate = document.getElementById('start-timer-popup');
+    const popupClone = popupTemplate.content.cloneNode(true);
+    document.body.appendChild(popupClone);
+
+    const popup = document.getElementById('start-timer-popup-content');
+    setTimeout(() => {
+        popup.classList.add('hide');
+    }, 3600)
+    setTimeout(() => {
+        popup.remove();
+    }, 4000)
+}
+
 // previously guidePopup.js
 window.addEventListener('DOMContentLoaded', () =>{
     const helpguideBtn = document.getElementById('helpguide-btn');

@@ -1,6 +1,6 @@
 import { settingsHelper, loadSettings } from "./settings.js";
 import { playAudio } from "./audioSFX.js";
-import { breakfinishPopup, fmbreakwarningPopup, sessionfinishPopup, timertoast} from "./popups-toasts.js"
+import { breakfinishPopup, fmbreakwarningPopup, sessionfinishPopup, timertoast, starttimerPopup} from "./popups-toasts.js"
 import { helpers, saveHelpers, loadHelpers } from "./helpcounter.js";
 import { formatTime, formatHMS } from "./timeFormat.js";
 
@@ -24,6 +24,11 @@ let taskTracked = null;
 
 // start timer
 export function startTimer(){
+  const activeTask = document.querySelector('.task-item.active-task');
+  if (!activeTask){
+    starttimerPopup();
+    return;
+  }
   if (isFinished){ // stops user from repeating clicks. they have to click the restart button for the buttons to work again
     timertoast();
     return;
