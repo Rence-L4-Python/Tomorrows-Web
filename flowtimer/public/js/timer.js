@@ -1,6 +1,6 @@
 import { settingsHelper, loadSettings } from "./settings.js";
 import { playAudio } from "./audioSFX.js";
-import { breakfinishPopup, fmbreakwarningPopup, sessionfinishPopup, timertoast, starttimerPopup} from "./popups-toasts.js"
+import { breakfinishPopup, fmbreakwarningPopup, sessionfinishPopup, timertoast, starttimerPopup, breakfinishWarning} from "./popups-toasts.js"
 import { helpers, saveHelpers, loadHelpers } from "./helpcounter.js";
 import { formatTime, formatHMS } from "./timeFormat.js";
 import { addWorkTime } from "./graphUpdate.js";
@@ -129,6 +129,10 @@ function restartTimer(){
     if (!activeTask){
       starttimerPopup();
       return;
+    }
+    if (!isWorkSession){
+      breakfinishWarning();
+      return
     }
     if (isFinished){ // stops user from repeating clicks. they have to click the restart button for the buttons to work again
       timertoast();

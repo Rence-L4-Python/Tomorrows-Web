@@ -941,7 +941,7 @@ select{
     z-index: 1;
 }
 
-#session-finish-popup-content, #timer-toast, #break-finish-popup-content, #fmbreak-warning-popup-content, #start-timer-popup-content{
+#session-finish-popup-content, #timer-toast, #break-finish-popup-content, #fmbreak-warning-popup-content, #start-timer-popup-content, #break-finish-warning-content{
     position: fixed;
     height: 40px;
     white-space: nowrap;
@@ -959,7 +959,7 @@ select{
     animation: slideIn 0.4s ease;
 }
 
-#session-finish-popup-content.hide, #timer-toast.hide, #break-finish-popup-content.hide, #fmbreak-warning-popup-content.hide, #start-timer-popup-content.hide{
+#session-finish-popup-content.hide, #timer-toast.hide, #break-finish-popup-content.hide, #fmbreak-warning-popup-content.hide, #start-timer-popup-content.hide, #break-finish-warning-content.hide{
     animation: slideOut 0.4s ease forwards;
 }
 
