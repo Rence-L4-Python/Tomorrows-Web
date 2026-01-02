@@ -1,8 +1,8 @@
 import { settingsHelper, loadSettings } from "./settings.js";
 import { playAudio } from "./audioSFX.js";
-import { breakfinishPopup, fmbreakwarningPopup, sessionfinishPopup, timertoast } from "./popups-toasts.js"
+import { breakfinishPopup, fmbreakwarningPopup, sessionfinishPopup, timertoast} from "./popups-toasts.js"
 import { helpers, saveHelpers, loadHelpers } from "./helpcounter.js";
-import { formatTime } from "./timeFormat.js";
+import { formatTime, formatHMS } from "./timeFormat.js";
 
 let timerInterval = null;
 let isRunning = false;
@@ -17,6 +17,10 @@ let container= null;
 let startTime = null;
 let lastTime = null;
 let lastTimeWorked = null;
+let taskTrackInterval = null;
+let taskTrackstartTime = null;
+let taskTracklastTime = null;
+let taskTracked = null;
 
 // start timer
 export function startTimer(){
@@ -24,6 +28,7 @@ export function startTimer(){
     timertoast();
     return;
   }
+  
   if (isRunning){
     pauseTimer();
     return;
@@ -35,6 +40,8 @@ export function startTimer(){
   startTime = Date.now();
   lastTime = remainingTime;
   lastTimeWorked = helpers.totalTimeWorked;
+
+  trackTaskTime();
 
   timerInterval = setInterval(function(){
     const elapsed = Math.floor((Date.now() - startTime) / 1000);
@@ -145,6 +152,31 @@ function restartTimer(){
       saveHelpers();
     }
     sessionfinishPopup();
+  }
+
+  function trackTaskTime(){
+    const activeTask = document.querySelector('.task-item.active-task');
+    if (!activeTask) return;
+
+    const listtimetrack = activeTask.querySelector('.listtimetrack');
+    if (taskTrackInterval !== null) return;
+
+    taskTrackstartTime = Date.now();
+    taskTracklastTime = taskTracked;
+
+    taskTrackInterval = setInterval(() =>{
+      if (!isRunning){
+        clearInterval(taskTrackInterval);
+        taskTrackInterval = null;
+        taskTracked = taskTracklastTime + Math.floor((Date.now() - taskTrackstartTime) / 1000);
+        return;
+      }
+
+      const elapsed = Math.floor((Date.now() - taskTrackstartTime) / 1000);
+      const timetracked = taskTracklastTime + elapsed;
+
+      listtimetrack.textContent = formatHMS(timetracked);
+    }, 100)
   }
 
   // when finished, display a message/modal that the timer is complete. Should be clicked to dismiss.

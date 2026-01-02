@@ -28,9 +28,15 @@ window.addEventListener('DOMContentLoaded', () =>{
     initialTrack.addEventListener('click', () =>{
         const span = initialTrack.querySelector('span');
         if (initialTrack.textContent === "▶"){
-            if (isFinished){ // stops button from working if timer is finished so it works like in timer.js
-                return;
+            if (isFinished) return; // stops button from working if timer is finished so it works like in timer.js
+
+            const currentlyActive = document.querySelector('.task-item.active-task');
+            if (currentlyActive){
+                currentlyActive.classList.remove('active-task');
             }
+
+            initialTaskItem.classList.add('active-task');
+            
             span.textContent = "⏸";
             startTimer();
             return;
@@ -67,9 +73,14 @@ window.addEventListener('DOMContentLoaded', () =>{
             const span = trackButton.querySelector('span');
 
             if (trackButton.textContent === "▶"){
-                if (isFinished){ // stops button from working if timer is finished so it works like in timer.js
-                    return;
+                if (isFinished) return; // stops button from working if timer is finished so it works like in timer.js
+
+                const currentlyActive = document.querySelector('.task-item.active-task');
+                if (currentlyActive){
+                    currentlyActive.classList.remove('active-task');
                 }
+                
+                taskItem.classList.add('active-task');
                 span.textContent = "⏸";
                 startTimer();
                 return;
