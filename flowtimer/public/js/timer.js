@@ -93,7 +93,7 @@ export function startTimer(){
 
       sessionfinishPopup();
 
-      if (isWorkSession && timerSelect.value !== 'timer-countdown'){ // 
+      if (timerSelect.value !== 'timer-countdown'){ // 
         showSessionFinishModal();
         helpers.sessionNumber++;
         saveHelpers();
@@ -125,6 +125,10 @@ function restartTimer(){
 
   // finish timer
   function finishTimer(){
+    if (!isWorkSession){
+      startWorkSession();
+    }
+    
     if (isFinished){ // stops user from repeating clicks. they have to click the restart button for the buttons to work again
       timertoast();
       return;
