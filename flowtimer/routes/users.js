@@ -8,7 +8,10 @@ router.post('/', async (req, res) => {
     try {
         const newUser = new User({ email, password });
         await newUser.save();
-        res.status(201).json(newUser);
+        req.login(newUser, (err) =>{
+            if (err) return next (err);
+            return res.json({success:true});
+        })
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

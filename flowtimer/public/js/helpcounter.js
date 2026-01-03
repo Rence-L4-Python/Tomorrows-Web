@@ -14,13 +14,3 @@ export function loadHelpers(){
         Object.assign(helpers, JSON.parse(data));
     }
 }
-
-export function constHelpers(key, defaultValue){
-    loadHelpers();
-    if (helpers[key] !== undefined){
-        return helpers[key];
-    }
-    else{
-        return defaultValue;
-    }
-}

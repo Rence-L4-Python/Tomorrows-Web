@@ -3,10 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>WEBSITE TEST</title>
+        <title>Login to Flowtimer</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="google-signin-client_id" content="1037577736071-4gba0fb3ge2hk41crpeg2iqsorvtf9ih.apps.googleusercontent.com">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Mono">
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -18,7 +17,12 @@
                     <div class="flowtimerlogo"><img src="media/flowtimer-logo.svg" alt="Flowtimer"></div>
                     <div class="login-container">
                         <form id="loginForm" action="/login" method="POST">
-                            <div class="g-signin2" data-onsuccess="onSignIn" data-width="300" data-longtitle="true"></div>
+                            <a href="/auth/google" class="google-btn">
+                                <div class="google-icon-wrapper">
+                                    <img class="google-icon" src="https://developers.google.com/identity/images/g-logo.png">
+                                </div>
+                                <p><b>Sign in with Google</b></p>
+                            </a>
                             <hr class="w-auto bg-black/25">
                             <div class="flexgroup">
                             <label for="email">EMAIL</label>
@@ -40,6 +44,5 @@
             </div>
         </main>
         <script src="js/accountLogin.js"></script>
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
     </body>
 </html>

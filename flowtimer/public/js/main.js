@@ -8,3 +8,4 @@ import './settingsChange.js';
 import './crudFeature.js';
 import './audioSFX.js';
 import './popups-toasts.js';
+import './adminRedirect.js';

@@ -22,6 +22,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public'), {
 extensions: ['html', 'htm'] 
 }));
+
 app.use(session({
     secret: 'your_secret_key',
     resave: false,
@@ -30,10 +31,40 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.get('/api/user', (req, res) => { 
+    if (!req.isAuthenticated()) { 
+        return res.json({ user: null }); 
+    }
+    res.json({ 
+        email: req.user.email, 
+        name: req.user.name 
+    }); 
+});
+
 // MongoDB connection
 mongoose.connect('mongodb://localhost:27017/flowtimer', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err));
+
+// Redirect check
+
+function isLoggedIn(req, res, next){
+    if (req.isAuthenticated()){
+        return next();
+    }
+    res.redirect('/login.html');
+}
+
+// Redirect to files in the private folder
+app.get('/flowtimer', isLoggedIn, (req, res) => { 
+    res.sendFile(path.join(__dirname, 'private/flowtimer.html')); 
+}); 
+app.get('/metrics', isLoggedIn, (req, res) => { 
+    res.sendFile(path.join(__dirname, 'private/metrics.html')); 
+}); 
+app.get('/settings', isLoggedIn, (req, res) => { 
+    res.sendFile(path.join(__dirname, 'private/settings.html')); 
+});
 
 // Routes
 const users = require('./routes/users');
@@ -47,13 +78,17 @@ app.get('/auth/google',
 app.get('/auth/google/callback',
     passport.authenticate('google', {failureRedirect: '/login.html'}),
     (req, res) => {
-        res.redirect('/');
+        res.redirect('/flowtimer');
     }
 );
 
-app.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
+app.get('/logout', (req, res, next) => {
+    req.logout(function(err){
+        if (err) { return next(err); }
+        req.session.destroy(() => {
+            res.redirect('/login.html');
+        })
+    })
 });
 
 // Admin routes
@@ -64,14 +99,15 @@ app.post('/login', async (req, res) => {
     const { email, password } = req.body;
     try {
         const user = await User.findOne({ email, password });
-        if (user) {
-            // res.json({ message: 'Login successful' });
-            return res.json({success:true});
-        } else {
-            res.status(401).json({ error: 'Invalid email or password' });
+        if (!user) {
+            return res.status(401).json({ error: 'Invalid email or password' });
         }
+        req.login(user, (err) =>{
+            if (err) return next(err);
+            return res.json({success:true});
+        })
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        return res.status(500).json({ error: error.message });
     }
 });
 

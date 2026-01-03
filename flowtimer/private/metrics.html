@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>WEBSITE TEST</title>
+        <title>Metrics</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/style.css">
@@ -16,7 +16,7 @@
             <a href="/metrics">Metrics</a>
             <a href="/settings">Settings</a>
             <a href="#">Account</a>
-            <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">
+            <a href="javascript:void(0);" class="icon">
                 <i class="fa fa-bars"></i>
             </a>
         </nav>
@@ -77,8 +77,8 @@
                     <div class="cardalt-div1"><canvas id="acquisitions"></canvas></div>
                     <div>
                         <ul>
-                            <li>Total time worked: <span id="timeworked">(Loading...)</span> <span id="currentworkday">(Loading...)</span></li>
-                            <li>Tasks completed: <span id="numtaskcompleted">(Loading...)</span></li>
+                            <li>Total Time Worked: <span id="timeworked">(Loading...)</span></li>
+                            <li>Tasks Completed: <span id="numtaskcompleted">(Loading...)</span></li>
                             <li>Longest Focus Time: <span id="longestfocustime">(Loading...)</span></li>
                             <li>Amount of Sessions: <span id="amntsessions">(Loading...)</span></li>
                         </ul>
@@ -90,9 +90,9 @@
         <template id="account-template">
             <div class="tooltiptext account-tooltip">
                 <h2>Hello,</h2>
-                <span>example@gmail.com</span>
+                <span></span>
                 <hr>
-                <button>Sign out</button>
+                <button id="signout">Sign out</button>
             </div>
         </template>
         <footer>

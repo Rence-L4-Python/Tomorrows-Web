@@ -29,6 +29,7 @@ window.addEventListener('DOMContentLoaded', () =>{
             helpers.tasksCompleted++;
             saveHelpers();
             taskItem.remove();
+            saveTasks();
         })
 
         trackButton.addEventListener('click', () =>{
@@ -61,7 +62,7 @@ window.addEventListener('DOMContentLoaded', () =>{
     input.addEventListener('keypress', (e) =>{
         if (e.key === 'Enter') addButton.click();
     })
-
-    setInterval(saveTasks, 1000)
+    
     loadTasks();
+    setInterval(saveTasks, 1000)
 })

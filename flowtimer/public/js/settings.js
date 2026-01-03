@@ -20,13 +20,3 @@ export function loadSettings(){
         Object.assign(settings, JSON.parse(saved));
     }
 }
-
-export function settingsHelper(key, defaultValue){
-    loadSettings();
-    if (settings[key] !== undefined){
-        return settings[key];
-    }
-    else{
-        return defaultValue;
-    }
-}

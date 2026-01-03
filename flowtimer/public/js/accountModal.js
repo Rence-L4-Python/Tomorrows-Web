@@ -14,10 +14,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const signoutbtn = document.getElementById('signout');
           if (signoutbtn) {
             signoutbtn.addEventListener('click', () => {
-              window.location.replace("/index.html");
+              window.location.href = "/logout";
           })
         }
       }
+      fetch('/api/user')
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.email){
+            const emailSpan = accountModal.querySelector('span');
+            if (emailSpan){
+              emailSpan.textContent = data.email;
+            }
+          }
+        })
     })
   }
 })

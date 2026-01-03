@@ -3,12 +3,11 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>WEBSITE TEST</title>
+        <title>Settings</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Mono">
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     </head>
     <body>
         <nav id="mobile-nav">
@@ -17,7 +16,7 @@
             <a href="/metrics">Metrics</a>
             <a href="/settings">Settings</a>
             <a href="#">Account</a>
-            <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">
+            <a href="javascript:void(0);" class="icon">
                 <i class="fa fa-bars"></i>
             </a>
         </nav>
@@ -65,125 +64,90 @@
                 </div>
             </div>
         </aside>
-        <main class="align direction-row">
-            <div class="card-dropdown mt-10">
-                <select id="timerselector">
-                        <option value="timer-flowmodoro">Flowmodoro Timer</option>
-                        <option value="timer-pomodoro">Pomodoro Timer</option>
-                        <option value="timer-countdown">Countdown Timer</option>
-                </select>
-            </div>
-            <div class="card center align">
-                <div class="card-content center align">
-                    <div id="timer"></div>
-                    <div class="timerbuttons">
-                        <div class="timerbutton-wrapper">
-                            <button id="restart-btn"><img src="media/restart-button.svg"></button>
-                            <div class="overlay-tooltip"><span>Restart Timer</span></div>
-                        </div>
-                        <div class="timerbutton-wrapper">
-                            <button id="play-btn"><img src="media/play-button.svg"></button>
-                            <div class="overlay-tooltip"><span>Start / Stop Timer</span></div>
-                        </div>
-                        <div class="timerbutton-wrapper">
-                            <button id="finish-btn"><img src="media/finish-button.svg"></button>
-                            <div class="overlay-tooltip"><span>Finish Timer</span></div>
+        <main class="align">
+            <div class="cardalt">
+                <h1>Settings</h1>
+                <div class="cardalt-content">
+                    <div>
+                        <h2>Themes</h2>
+                        <select id="themes">
+                            <option>Mountain</option>
+                            <option>Pink Waves</option>
+                            <option>Sky High</option>
+                            <option>Foggy Sunrise</option>
+                            <option>Pink Gradient</option>
+                            <option>Earthy Gradient</option>
+                        </select>
+                    </div>
+                    <div>
+                        <h2>Timers</h2>
+                        <div class="settings-timer">
+                            <div class="direction-column">
+                                <div>
+                                    <div class="settings-timercardheader"><span>Flowmodoro Timer</span></div>
+                                    <div class="settings-timercardbody">
+                                        <input name="setting-flowmodoro" id="setting-flowmodoro" type="text" value="5">
+                                        <label for="setting-flowmodoro">Work - Break Ratio</label>
+                                        <span>For every minute worked, total work time is divided by this number.</span>
+                                    </div>
+                                </div> 
+                                <div>
+                                    <div class="settings-timercardheader"><span>Countdown Timer</span></div>
+                                    <div class="settings-timercardbody">
+                                        <input name="setting-countdown" id="setting-countdown" type="text" value="60s">
+                                        <label for="setting-countdown">Timer</label>
+                                        <span>The same as a normal timer.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="settings-timercardheader"><span>Pomodoro Timer</span></div>
+                                <div class="settings-timercardbody height-285">
+                                    <label for="setting-pomodoro">Pomodoro</label>
+                                    <input name="setting-pomodoro" id="setting-pomodoro" type="text" value="25m">
+                                    <label for="setting-shortbreak">Short Break</label>
+                                    <input name="setting-shortbreak" id="setting-shortbreak" type="text" value="5m">
+                                    <label for="setting-longbreak">Long Break</label>
+                                    <input name="setting-longbreak" id="setting-longbreak" type="text" value="15m">
+                                    <label for="setting-sessions">Sessions before Long Break</label>
+                                    <input name="setting-sessions" id="setting-sessions" type="text" value="4">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="taskselector font-nunito">
-                        <input type="text" id="task-input" placeholder="Add a new task">
-                        <button id="add-task"><span>+</span></button>
-                    </div>
+                    <button id="resetSettingsButton">Reset to Default Settings</button>
+                    <!-- currently having issues with this part
+                    <div> 
+                        <h3>Account deletion!</h3>
+                        <div class="cardalt-div2">
+                            <input name="account-deletion" id="account-deletion" type="checkbox">
+                            <label for="account-deletion">I want to delete my account</label>
+                        </div>
+                    </div> 
+                    -->
                 </div>
             </div>
-            <div class="container-tasks mt-10">
-                <div class="task-header font-nunito">
-                    <span>Tasks</span>
-                </div>
-                <ul class="taskpop-wrapper" id="task-list">
-                </ul>
-            </div>
-            <div id="guide-popup" class="hidden">
-                <button id="closehelpguide">X</button>
-                <div class="guidearea">
-
-                </div>
-                <div class="darkerscreen"></div>
-            </div>
-            <div id="current-status">
-                <p>Current Status: <span id="status-text">Working</b></p>
-            </div>
-            <button id="helpguide-btn">Help / Guide</button>
         </main>
-
-        <!-- ============================== templates for javascript ============================== -->
         <template id="account-template">
             <div class="tooltiptext account-tooltip">
                 <h2>Hello,</h2>
-                <span>example@gmail.com</span>
+                <span></span>
                 <hr>
                 <button id="signout">Sign out</button>
-            </div>
-        </template>
-        <template id="task-template">
-            <li class="task-item">
-                <div class="direction-row">
-                    <input class="task-text"></input>
-                    <div class="flex justify-center items-center gap-3">
-                        <button class="tracktask"><span>▶</span></button>
-                        <button class="finishtask"><span>✓</span></button>
-                    </div>
-                </div>
-                <div>
-                    <span class="listtimetrack">0h 0m 0s</span>
-                </div>
-            </li>
-        </template>
-        <template id="timer-toast-template">
-            <div id="timer-toast">
-                <p>Please click the restart button to use the timer again.</p>
-            </div>
-        </template>
-        <template id="session-finish-popup">
-            <div id=session-finish-popup-content>
-                <p>Session finished!</p>
-            </div>
-        </template>
-        <template id="break-finish-popup">
-            <div id="break-finish-popup-content">
-                <p>Break time is over!</p>
-            </div>
-        </template>
-        <template id="fmbreak-warning-popup">
-            <div id="fmbreak-warning-popup-content">
-                <p>You can only finish a Flowmodoro task after working for 1 minute.</p>
-            </div>
-        </template>
-        <template id="start-timer-popup">
-            <div id="start-timer-popup-content">
-                <p>Start tracking by clicking play on a task in the list!</p>
-            </div>
-        </template>
-        <template id="break-finish-warning">
-            <div id="break-finish-warning-content">
-                <p>You cannot finish a break at this current stage. Please refresh the page if you want to reset instead.</p>
-            </div>
-        </template>
-        <template id="session-finish-template">
-            <div class="modal-overlay">
-                <div class="modal-box">
-                    <p class="modal-text">Session <span>1</span> is over!</p>
-                    <button id="start-break-btn" class="border border-solid border-black/10 rounded-2xl hover:bg-black/10">Start Break</button>
-                    <button id="skip-break-btn" class="border border-solid border-black/10 rounded-2xl hover:bg-black/10">Skip Break</button>
-                </div>
             </div>
         </template>
         <footer>
             <div class="footer-content">
                 <div class="footer-text">© Rence Joshua G. Abellanosa. All rights reserved.</div>
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="/flowtimer">Home</a></li>
+                        <li><a href="/metrics">Metrics</a></li>
+                        <li><a href="/settings">Settings</a></li>
+                    </ul>
+                </div>
             </div>
         </footer>
-        <script src="https://cdn.jsdelivr.net/npm/progressbar.js/dist/progressbar.min.js"></script>
         <script src="js/main.js" type="module"></script>
     </body>
 </html>

@@ -75,15 +75,6 @@ if (savedYearly){
 
 //////////
 
-function currentDateInfo(){
-  const format = now.toLocaleDateString(undefined, {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
-  document.getElementById('currentworkday').textContent = `(${format})`;
-}
-
 function loadDatafromHelpers(){
   document.getElementById('timeworked').textContent = formatHMS(helpers.totalTimeWorked);
   document.getElementById('numtaskcompleted').textContent = helpers.tasksCompleted;
@@ -117,7 +108,7 @@ export function renderGraph(type = 'daily'){
       labels: data.map(row => row.time),
       datasets: [
         {
-          label: 'Total time worked in minutes',
+          label: 'Total time worked',
           data: data.map(row => row.worktime),
           backgroundColor: '#4F46E5',
         }
@@ -126,7 +117,21 @@ export function renderGraph(type = 'daily'){
     options: {
       responsive: true,
       maintainAspectRatio: false,
-    }
+      plugins: { 
+        tooltip: { 
+          callbacks: { 
+            label: function(context) { 
+              const seconds = context.raw; 
+              return formatHMS(seconds); } 
+            } 
+          } 
+        }, 
+        scales: { 
+          y: { 
+            display: false
+          } 
+        } 
+      }
   });
 }
 
@@ -144,7 +149,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   })
   renderGraph('daily');
-  currentDateInfo();
   loadHelpers();
   loadDatafromHelpers();
 })
